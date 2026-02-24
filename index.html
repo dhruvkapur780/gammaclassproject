@@ -3,217 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lydia Rajadurai | Professional Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Benjamin Laughlin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="header">
-    <nav class="nav">
-      <a href="#" class="logo">LR</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Toggle menu">
+  <!-- Top banner with site name and section links -->
+  <header class="banner">
+    <div class="banner-inner">
+      <a href="#home" class="banner-logo">Benjamin Laughlin</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
       </button>
-    </nav>
+      <nav class="banner-nav" aria-label="Main navigation">
+        <ul class="banner-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#resume">Resume</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero">
+    <section id="home" class="hero">
       <div class="hero-content">
-        <p class="hero-greeting">Hello, I'm</p>
-        <h1>Lydia Rajadurai</h1>
-        <p class="hero-tagline">Honors Finance Student at Indiana University - Kelley School of Business | ACE Program</p>
-        <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary">Get in Touch</a>
-          <a href="#projects" class="btn btn-secondary">View Work</a>
+        <p class="hero-label">Hi, I'm</p>
+        <h1 class="hero-title">Benjamin Laughlin</h1>
+        <p class="hero-tagline">Building things that matter.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View work</a>
+          <a href="#contact" class="btn btn-primary">Get in touch</a>
         </div>
       </div>
-      <div class="hero-scroll">
-        <span>Scroll to explore</span>
-        <div class="scroll-indicator"></div>
+      <div class="hero-accent" aria-hidden="true"></div>
+    </section>
+
+    <section id="about" class="block about-block">
+      <div class="container">
+        <div class="about-layout">
+          <div class="about-label">
+            <h2 class="block-title">About</h2>
+          </div>
+          <div class="about-body">
+            <p class="about-text">
+              Short bio placeholder. Replace with a sentence or two about yourself, your interests, and what you're working toward.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="about" class="section">
+    <section id="projects" class="block projects-block">
       <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-grid">
-          <div class="about-image">
-            <img src="lydia-photo.png" alt="Lydia Rajadurai" class="profile-photo">
-          </div>
-          <div class="about-content">
-            <p class="about-lead">
-              I'm a freshman finance major interested in double majoring in accounting, with a strong focus on business and data analytics. I'm driven by how financial data tells a story and how analytical thinking supports better strategic decisions—especially at the intersection of finance, technology, and problem-solving.
-            </p>
-            <p>
-              I'm eager to build a career combining technical skills with strategic thinking in corporate finance, consulting, or financial analytics. What sets me apart is my attention to detail, structured mindset, and interest in using data to drive meaningful business decisions—not just report results.
-            </p>
-            <div class="about-details">
-              <div class="detail-item">
-                <strong>Location:</strong>
-                <span>Dallas-Fort Worth Metroplex</span>
-              </div>
-              <div class="detail-item">
-                <strong>Email:</strong>
-                <span>lrajadur@iu.edu</span>
-              </div>
-              <div class="detail-item">
-                <strong>LinkedIn:</strong>
-                <a href="https://www.linkedin.com/in/lydia-rajadurai" target="_blank" rel="noopener noreferrer">linkedin.com/in/lydia-rajadurai</a>
-              </div>
+        <div class="block-head">
+          <h2 class="block-title">Projects</h2>
+        </div>
+        <p class="block-intro">Placeholder projects—add your own and link to repos or demos in any language (HTML, Java, Python, etc.).</p>
+        <div class="bento">
+          <article class="project-card project-card-featured">
+            <h3 class="project-title">Project Title</h3>
+            <p class="project-desc">Description coming soon. Link to code or a demo when ready.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline">View project</a>
+              <a href="#" class="btn btn-outline">Code</a>
             </div>
-          </div>
+          </article>
+          <article class="project-card">
+            <h3 class="project-title">Project Title</h3>
+            <p class="project-desc">Description coming soon.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline">View</a>
+              <a href="#" class="btn btn-outline">Code</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <h3 class="project-title">Project Title</h3>
+            <p class="project-desc">Description coming soon.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline">View</a>
+              <a href="#" class="btn btn-outline">Code</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="experience" class="section section-alt">
+    <section id="resume" class="block resume-block">
       <div class="container">
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <span class="timeline-date">Jun 2024 – Aug 2025 · 1 yr 3 mos</span>
-              <h3>Mathematics Instructor</h3>
-              <p class="timeline-company">Mathnasium - The Math Learning Center · Part-time</p>
-              <p class="timeline-location">Flower Mound, Texas, United States</p>
-              <ul>
-                <li>Instructed and mentored 40+ students weekly across arithmetic through calculus, strengthening quantitative and analytical skills</li>
-                <li>Enhanced student comprehension by simplifying complex multi-step problems into 3-5 structured, easy-to-follow steps</li>
-                <li>Adapted instruction methods for 100% of students, tailoring explanations to individual learning styles and academic levels</li>
-                <li>Reported student progress and learning gaps to center director and lead instructors weekly, influencing curriculum adjustments</li>
+        <div class="block-head">
+          <h2 class="block-title">Resume</h2>
+        </div>
+        <div class="resume-layout">
+          <div class="resume-cta">
+            <p class="resume-placeholder">Resume (PDF) coming soon.</p>
+            <a href="#" class="btn btn-primary" aria-disabled="true">Download resume</a>
+          </div>
+          <div class="resume-cols">
+            <div class="resume-col">
+              <h3 class="resume-subtitle">Experience</h3>
+              <ul class="resume-list">
+                <li>Experience placeholder—add roles and dates.</li>
+              </ul>
+            </div>
+            <div class="resume-col">
+              <h3 class="resume-subtitle">Skills</h3>
+              <ul class="resume-list">
+                <li>Skills placeholder—add technologies and tools.</li>
               </ul>
             </div>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <span class="timeline-date">Jun 2023 – Aug 2023 · 3 mos</span>
-              <h3>Sales Associate</h3>
-              <p class="timeline-company">Trailhead Running Supply · Part-time</p>
-              <p class="timeline-location">Flower Mound, Texas, United States</p>
-              <ul>
-                <li>Processed 15+ customer transactions per shift, accurately managing $500+ in daily sales using POS systems</li>
-                <li>Delivered personalized product recommendations, supporting repeat customers and increasing overall average purchase value</li>
-                <li>Organized and restocked 100+ SKUs weekly, maintaining optimal sales floor organization and consistent product accessibility</li>
-                <li>Managed daily sales and promotional discounts, gaining exposure to pricing, revenue tracking, and small-business financials</li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <section id="skills" class="section">
+    <section id="contact" class="block contact-block">
       <div class="container">
-        <h2 class="section-title">Skills</h2>
-        <div class="skills-list">
-          <span class="skill-tag">Team Motivation</span>
-          <span class="skill-tag">Inventory Management</span>
-          <span class="skill-tag">Product Knowledge</span>
-          <span class="skill-tag">Communication</span>
-          <span class="skill-tag">Time Management</span>
-          <span class="skill-tag">Skilled Multi-tasker</span>
-          <span class="skill-tag">Customer Satisfaction</span>
-          <span class="skill-tag">Mathematics</span>
-          <span class="skill-tag">Teaching</span>
-          <span class="skill-tag">Conflict Resolution</span>
+        <div class="block-head">
+          <h2 class="block-title">Contact</h2>
         </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder small">Project 1</div>
-            </div>
-            <div class="project-info">
-              <h3>[Project Title]</h3>
-              <p>[Brief description of the project, your role, technologies used, and outcomes.]</p>
-              <div class="project-links">
-                <a href="#">View Project</a>
-                <a href="#">GitHub</a>
-              </div>
-            </div>
-          </article>
-          <article class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder small">Project 2</div>
-            </div>
-            <div class="project-info">
-              <h3>[Project Title]</h3>
-              <p>[Brief description of the project and your contributions.]</p>
-              <div class="project-links">
-                <a href="#">View Project</a>
-                <a href="#">GitHub</a>
-              </div>
-            </div>
-          </article>
-          <article class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder small">Project 3</div>
-            </div>
-            <div class="project-info">
-              <h3>[Project Title]</h3>
-              <p>[Brief description of the project and your contributions.]</p>
-              <div class="project-links">
-                <a href="#">View Project</a>
-                <a href="#">GitHub</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="container">
-        <h2 class="section-title">Get in Touch</h2>
-        <div class="contact-content">
-          <p class="contact-lead">
-            [A short message inviting visitors to reach out — e.g., "I'm always open to new opportunities, collaborations, or a friendly conversation."]
-          </p>
-          <div class="contact-links">
-            <a href="mailto:lrajadur@iu.edu" class="contact-link">
-              <span class="contact-icon">✉</span>
-              lrajadur@iu.edu
-            </a>
-            <a href="https://www.linkedin.com/in/lydia-rajadurai" target="_blank" rel="noopener noreferrer" class="contact-link">
-              <span class="contact-icon">in</span>
-              LinkedIn
-            </a>
-            <a href="#" class="contact-link">
-              <span class="contact-icon">⌘</span>
-              GitHub
-            </a>
-            <a href="Lydia_Rajadurai_RevisedResume.pdf" target="_blank" rel="noopener noreferrer" class="contact-link">
-              <span class="contact-icon">📄</span>
-              Resume / CV
-            </a>
-          </div>
+        <p class="block-intro">Get in touch—placeholders below. Replace with your real links.</p>
+        <div class="contact-pills">
+          <a href="mailto:your.email@example.com" class="pill">Email</a>
+          <a href="#" class="pill">LinkedIn</a>
+          <a href="#" class="pill">GitHub</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Lydia Rajadurai. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-text">Benjamin Laughlin · 2025</p>
+      <p class="footer-credit">Built with HTML, CSS, and JavaScript.</p>
     </div>
   </footer>
 
