@@ -1,0 +1,7 @@
+{
+  "name": "kaitlynn-ng-website",
+  "private": true,
+  "scripts": {
+    "start": "npx serve ."
+  }
+}
