@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hannah Stamler | Personal Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="#home" class="logo">Hannah Stamler</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-name">Hannah Stamler</h1>
+        <p class="hero-tagline">Researcher | Imaginative, curious clinical psychology student</p>
+        <p class="hero-bio">[Short intro: 1–2 sentences about what you do and who you help.]</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Get in touch</a>
+          <a href="#projects" class="btn btn-secondary">View work</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <div class="about-grid">
+          <div class="about-image">
+            <img src="hannah-headshot.png" alt="Hannah Stamler headshot" class="about-headshot" />
+          </div>
+          <div class="about-text">
+            <p>[Paragraph 1: Your background, education, and how you got to where you are.]</p>
+            <p>[Paragraph 2: What drives you, your approach to work, and what you care about.]</p>
+            <p>[Paragraph 3: Optional — interests, location, or a fun fact.]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section experience">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-date">[Year – Present]</span>
+            <h3>[Job Title]</h3>
+            <p class="timeline-company">[Company Name]</p>
+            <p>[Brief description of role and key responsibilities.]</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">[Year – Year]</span>
+            <h3>[Job Title]</h3>
+            <p class="timeline-company">[Company Name]</p>
+            <p>[Brief description of role and key responsibilities.]</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">[Year – Year]</span>
+            <h3>[Job Title]</h3>
+            <p class="timeline-company">[Company Name]</p>
+            <p>[Brief description of role and key responsibilities.]</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-image placeholder-image">[Project image]</div>
+            <div class="project-content">
+              <h3>[Project name]</h3>
+              <p>[Short description of the project and your role.]</p>
+              <a href="#" class="project-link">View project →</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-image placeholder-image">[Project image]</div>
+            <div class="project-content">
+              <h3>[Project name]</h3>
+              <p>[Short description of the project and your role.]</p>
+              <a href="#" class="project-link">View project →</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-image placeholder-image">[Project image]</div>
+            <div class="project-content">
+              <h3>[Project name]</h3>
+              <p>[Short description of the project and your role.]</p>
+              <a href="#" class="project-link">View project →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="contact-intro">[A line inviting people to reach out — e.g. "I'm always open to new opportunities and conversations."]</p>
+        <div class="contact-links">
+          <a href="mailto:your.email@example.com" class="contact-link">your.email@example.com</a>
+          <a href="#" class="contact-link">LinkedIn</a>
+          <a href="#" class="contact-link">Twitter / X</a>
+          <a href="#" class="contact-link">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Hannah Stamler. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
