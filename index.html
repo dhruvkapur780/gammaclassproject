@@ -3,173 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sunehri Gupta — Indiana University Kelley School of Business, Finance major. Aspiring finance professional, case competition winner, and impact-focused leader.">
-  <title>Sunehri Gupta — Finance & Consulting</title>
+  <title>Grace Friedman — Personal Website</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav">
-      <a href="#about" class="nav-link">About</a>
-      <a href="#education" class="nav-link">Education</a>
-      <a href="#experience" class="nav-link">Experience</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#skills" class="nav-link">Skills</a>
-      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#home" class="nav-logo">GF</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#coursework">Coursework</a></li>
+        <li><a href="#involvement">Campus Involvement</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
   </header>
 
   <main>
-    <section id="hero" class="hero">
-      <h1 class="hero-title">Sunehri Gupta</h1>
-      <p class="hero-subtitle">Indiana University Kelley School of Business · Aspiring Finance Professional · Analytical & Impact-Focused</p>
-      <a href="#contact" class="btn btn-primary">Get in touch</a>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-name">Grace Friedman</h1>
+        <p class="hero-tagline">Accounting Student — Kelley School of Business</p>
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+      </div>
+      <div class="hero-visual">
+        <img src="grace-headshot.png" alt="Grace Friedman" class="hero-photo">
+      </div>
     </section>
 
     <section id="about" class="section">
-      <h2 class="section-title">About</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p class="lead">I am a driven and impact-focused student at the Kelley School of Business with a strong interest in finance, consulting, and social entrepreneurship. I combine analytical rigor with clear communication—honed through competitive debate and case competitions—to deliver data-driven solutions.</p>
-          <p>I'm pursuing a Bachelor of Science in Business with a major in Finance and a minor in Theatre & Drama (May 2029). I'm from the San Francisco Bay Area and currently based in Bloomington, Indiana. Beyond academics, I enjoy hiking, Bollywood dance, landscape painting, and giving back through initiatives like the Bal Bharti Project in Rajasthan.</p>
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p class="lead">I am a first-year student at Indiana University's Kelley School of Business studying Accounting, with a focused interest in tax strategy and financial advisory services. My passion for accounting stems from my love of analytical problem-solving and my belief that financial clarity empowers smarter decisions. As a leader, team collaborator, and lifelong learner, I strive to combine technical precision with professionalism and integrity in everything I pursue.</p>
+          </div>
+          <aside class="about-details">
+            <h3>Quick facts</h3>
+            <ul>
+              <li><strong>Location</strong> New York, USA</li>
+              <li><strong>Currently</strong> Full-time student</li>
+              <li><strong>Focus</strong> Tax Accounting</li>
+            </ul>
+          </aside>
         </div>
-        <div class="about-image">
-          <div class="placeholder-image" aria-hidden="true">Photo placeholder</div>
+      </div>
+    </section>
+
+    <section id="experience" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-date">November 2024 – August 2025</span>
+            <div class="timeline-content">
+              <h3>Cashier & Barista</h3>
+              <p class="timeline-company">El Churro</p>
+              <p>I created engaging social media content (10+ promo videos with 1,500+ views each), provided excellent customer service while managing $3,000–$4,000 in sales per shift, and opened the café twice a week, reconciling cash and ensuring accurate daily reporting.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">August 2025 – May 2029</span>
+            <div class="timeline-content">
+              <h3>Accounting Student</h3>
+              <p class="timeline-company">Kelley School of Business</p>
+              <p>Building expertise in financial reporting, data analysis, and business strategy through rigorous coursework, with a strong emphasis on analytical thinking, ethical decision making, and applying quantitative skills to real-world business problems.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="education" class="section section-alt">
-      <h2 class="section-title">Education</h2>
-      <div class="timeline">
-        <article class="timeline-item">
-          <span class="timeline-date">2025 – May 2029</span>
-          <h3 class="timeline-role">Bachelor of Science in Business</h3>
-          <p class="timeline-company">Indiana University, Kelley School of Business · Bloomington, Indiana</p>
-          <p class="timeline-desc">Major: Finance · Minor: Theatre & Drama · GPA: 3.88/4.00. Dean's Scholar; Jellison Living Learning Center, Philanthropy Leadership Council; Women's Financial Association; Women in Accounting.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">2021 – 2025</span>
-          <h3 class="timeline-role">High School Diploma</h3>
-          <p class="timeline-company">Dougherty Valley High School · San Ramon, California</p>
-          <p class="timeline-desc">Varsity Speech & Debate; AP Scholar with Distinction.</p>
-        </article>
+    <section id="coursework" class="section">
+      <div class="container">
+        <h2 class="section-title">Relevant Coursework</h2>
+        <div class="coursework-grid">
+          <div class="coursework-item">
+            <h3>Introduction to Principles of Accounting</h3>
+            <p class="coursework-code">BUS-A 100</p>
+            <p class="coursework-desc">Learned financial statement preparation, transaction analysis, and the fundamentals of accounting for business decision-making.</p>
+          </div>
+          <div class="coursework-item">
+            <h3>[Course name]</h3>
+            <p>[Course code — e.g. A 202]</p>
+          </div>
+          <div class="coursework-item">
+            <h3>[Course name]</h3>
+            <p>[Course code — e.g. A 311]</p>
+          </div>
+          <div class="coursework-item">
+            <h3>[Course name]</h3>
+            <p>[Course code]</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="experience" class="section">
-      <h2 class="section-title">Experience</h2>
-      <div class="timeline">
-        <article class="timeline-item">
-          <span class="timeline-date">Jan 2026 – Present</span>
-          <h3 class="timeline-role">Analyst</h3>
-          <p class="timeline-company">Limitless Consulting Club · Bloomington, Indiana</p>
-          <p class="timeline-desc">Selected from a competitive applicant pool to join a network of consultants and entrepreneurs driving measurable impact. Work with diverse teams to analyze business challenges, develop actionable strategies, and support data-driven solutions.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">Jan 2026 – Present</span>
-          <h3 class="timeline-role">Member</h3>
-          <p class="timeline-company">Financial Opportunity Program · Bloomington, Indiana</p>
-          <p class="timeline-desc">Craft finance-focused resumes, build professional communication skills, and navigate career preparation through workshops. Develop connections through upperclassmen mentorship, networking chats, and exposure to finance pathways.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">Oct 2025 – Present</span>
-          <h3 class="timeline-role">Investment Fund Associate</h3>
-          <p class="timeline-company">Women's Financial Association · Bloomington, Indiana</p>
-          <p class="timeline-desc">Serve on the Investment Fund Committee out of a highly competitive pool of 100+ applicants in a two-stage interview process. Contribute to market research, stock pitches, and equity analysis to empower women in finance and develop financial literacy.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">Sep 2025 – Present</span>
-          <h3 class="timeline-role">Philanthropy Council</h3>
-          <p class="timeline-company">Jellison Living Learning Center · Bloomington, Indiana</p>
-          <p class="timeline-desc">Foster community engagement with 100+ participants in events through outreach and marketing. Coordinate initiatives like the Empowering Professionals Series and volunteer for Habitat for Humanity.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">July 2025</span>
-          <h3 class="timeline-role">Sales Associate</h3>
-          <p class="timeline-company">Skechers · Livermore, California</p>
-          <p class="timeline-desc">Engaged with 50+ customers daily with personalized service and style/comfort recommendations. Collaborated with the team to exceed $20,000 daily sales targets and maintain store environment and inventory organization.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">June 2022 – June 2025</span>
-          <h3 class="timeline-role">Project Lead</h3>
-          <p class="timeline-company">Bal Bharti Project · Alwar, Rajasthan</p>
-          <p class="timeline-desc">Led transformation of a nonprofit school affected by globalization and financial instability. Raised $25,000+ through partnerships with nonprofits and local donors; trained educators to improve student literacy and modernize the school.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">Aug 2021 – June 2025</span>
-          <h3 class="timeline-role">Coach & Competitor</h3>
-          <p class="timeline-company">Dougherty Valley Varsity Speech and Debate · San Ramon, California</p>
-          <p class="timeline-desc">Competed in 20+ Congressional Debate tournaments, building analysis, critical thinking, and persuasive speaking. Mentored 20 middle school students in research strategies, argument development, and compelling delivery.</p>
-        </article>
+    <section id="involvement" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Campus involvement</h2>
+        <div class="involvement-list">
+          <article class="involvement-item">
+            <h3>[Organization or club name]</h3>
+            <p class="involvement-role">[Your role — e.g. Member, Treasurer, Committee Chair]</p>
+            <p>[Brief description of your involvement and impact.]</p>
+          </article>
+          <article class="involvement-item">
+            <h3>[Organization or club name]</h3>
+            <p class="involvement-role">[Your role]</p>
+            <p>[Brief description.]</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="projects" class="section section-alt">
-      <h2 class="section-title">Projects & Competitions</h2>
-      <div class="projects-grid">
-        <article class="project-card">
-          <div class="project-image placeholder-image">Case competition</div>
-          <h3 class="project-title">HCN x Kaufman Hall Case Competition</h3>
-          <p class="project-desc">Placed 1st out of 100 teams in healthcare consulting case competition; earned $400. Collaborated on data-driven strategy and pitch delivery.</p>
-          <a href="https://www.linkedin.com/in/sunehri-gupta/" class="project-link" target="_blank" rel="noopener">LinkedIn post →</a>
-        </article>
-        <article class="project-card">
-          <div class="project-image placeholder-image">Pitch event</div>
-          <h3 class="project-title">Big Ten Women's Case Competition</h3>
-          <p class="project-desc">Selected from 100+ applicants as one of two teams to represent Indiana University; awarded Best Speaker among Big Ten teams ($250).</p>
-          <a href="https://www.linkedin.com/in/sunehri-gupta/" class="project-link" target="_blank" rel="noopener">LinkedIn →</a>
-        </article>
-        <article class="project-card">
-          <div class="project-image placeholder-image">Connect 3</div>
-          <h3 class="project-title">Connect 3 — Berkeley Business Academy</h3>
-          <p class="project-desc">Co-founded digital platform connecting volunteers with nonprofits. Served as Chief Digital Officer/CTO; oversaw UI and project management. Placed 2nd at pitch to Haas professors; won Golden Bear Student Always Award.</p>
-          <a href="https://www.linkedin.com/in/sunehri-gupta/" class="project-link" target="_blank" rel="noopener">LinkedIn →</a>
-        </article>
-        <article class="project-card">
-          <div class="project-image placeholder-image">PurePop</div>
-          <h3 class="project-title">PurePop — UCLA Social Entrepreneurship</h3>
-          <p class="project-desc">Co-founded PurePop, an all-natural cleaning spray from repurposed food scraps. Directed operations and financial planning; managed logistics, budget forecasting, and TAM/SAM/SOM research. Secured 1st place at final pitch to professors and entrepreneurs.</p>
-          <a href="https://www.linkedin.com/in/sunehri-gupta/" class="project-link" target="_blank" rel="noopener">LinkedIn →</a>
-        </article>
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Selected work</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-image placeholder-image">
+              <span>Project image</span>
+            </div>
+            <div class="project-info">
+              <h3>[Project name]</h3>
+              <p>[One-line description of the project and your role.]</p>
+              <a href="#" class="link-arrow">View project →</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-image placeholder-image">
+              <span>Project image</span>
+            </div>
+            <div class="project-info">
+              <h3>[Project name]</h3>
+              <p>[One-line description.]</p>
+              <a href="#" class="link-arrow">View project →</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-image placeholder-image">
+              <span>Project image</span>
+            </div>
+            <div class="project-info">
+              <h3>[Project name]</h3>
+              <p>[One-line description.]</p>
+              <a href="#" class="link-arrow">View project →</a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="skills" class="section">
-      <h2 class="section-title">Skills & Certifications</h2>
-      <div class="skills-content">
-        <p class="skills-intro">I combine analytical and operational skills with strong communication and project management. Certified in Bloomberg platforms.</p>
-        <ul class="skills-list">
-          <li>Market Research</li>
-          <li>Financial Analysis</li>
-          <li>Project Management</li>
-          <li>Operations</li>
-          <li>Sales & Customer Engagement</li>
-          <li>Data-Driven Strategy</li>
-          <li>Bloomberg Finance Fundamentals</li>
-          <li>Bloomberg Market Concepts</li>
-          <li>Bloomberg Spreadsheet Analysis</li>
-        </ul>
-        <p class="skills-languages"><strong>Languages:</strong> English & Hindi (native/bilingual), Spanish (limited working)</p>
-      </div>
-    </section>
-
-    <section id="contact" class="section section-alt contact-section">
-      <h2 class="section-title">Contact</h2>
-      <p class="contact-intro">I'm open to internships, case competitions, and collaboration. Reach out—I'd love to connect.</p>
-      <div class="contact-links">
-        <a href="mailto:sunegupt@iu.edu" class="contact-link">sunegupt@iu.edu</a>
-        <a href="tel:+19259643601" class="contact-link">(925) 964-3601</a>
-        <a href="https://www.linkedin.com/in/sunehri-gupta/" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
+    <section id="contact" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-content">
+          <p class="lead">[Short line inviting people to reach out — e.g. "I'm always open to new conversations and collaborations."]</p>
+          <ul class="contact-links">
+            <li><a href="mailto:your.email@example.com">your.email@example.com</a></li>
+            <li><a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://twitter.com/yourhandle" target="_blank" rel="noopener">Twitter / X</a></li>
+            <li><a href="#" target="_blank" rel="noopener">[Resume / CV]</a></li>
+          </ul>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© <span id="year"></span> Sunehri Gupta. All rights reserved.</p>
+    <div class="container">
+      <p>© <span id="year"></span> Grace Friedman. [Optional: "Built with care" or similar.]</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
