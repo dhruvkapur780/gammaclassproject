@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dhruv Kapur | Finance &amp; Business Analytics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Dhruv Kapur – Sophomore at Kelley School of Business studying Finance & Business Analytics, founder of KFilms, and researcher at Wharton People Lab."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #020617;
+        --bg-elevated: #050b1f;
+        --bg-elevated-soft: #070f26;
+        --border-subtle: rgba(148, 163, 184, 0.2);
+        --accent: #3b82f6;
+        --accent-soft: rgba(59, 130, 246, 0.18);
+        --accent-strong: #60a5fa;
+        --text: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.65);
+        --radius-lg: 24px;
+        --radius-md: 18px;
+        --radius-pill: 999px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: radial-gradient(
+          circle at top,
+          #0f172a 0,
+          #020617 55%,
+          #020617 100%
+        );
+        color: var(--text);
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      p {
+        margin: 0 0 0.75rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0 0 0.75rem;
+        font-family: "Playfair Display", "Times New Roman", serif;
+        letter-spacing: 0.02em;
+      }
+
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 24px 16px 56px;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 18px;
+        margin: 0 0 24px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(18px);
+      }
+
+      .logo-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(
+          circle at 30% 0,
+          #93c5fd 0,
+          #1d4ed8 40%,
+          #020617 100%
+        );
+        border: 1px solid rgba(191, 219, 254, 0.6);
+        font-weight: 700;
+        font-size: 0.9rem;
+        letter-spacing: 0.16em;
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        font-size: 0.9rem;
+      }
+
+      .site-nav a {
+        position: relative;
+        color: var(--text-soft);
+        padding: 4px 0;
+        transition: color 150ms ease;
+      }
+
+      .site-nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        width: 0;
+        height: 2px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #60a5fa, #a855f7);
+        transition: width 180ms ease;
+      }
+
+      .site-nav a:hover {
+        color: var(--text);
+      }
+
+      .site-nav a:hover::after {
+        width: 100%;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 9px 18px;
+        border-radius: var(--radius-pill);
+        font-size: 0.9rem;
+        font-weight: 500;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: background-color 160ms ease, border-color 160ms ease,
+          transform 160ms ease, box-shadow 160ms ease, color 160ms ease;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        border-color: rgba(191, 219, 254, 0.4);
+        color: #eff6ff;
+        box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 40px rgba(37, 99, 235, 0.6);
+      }
+
+      .btn-outline {
+        border-color: rgba(148, 163, 184, 0.7);
+        color: var(--text);
+        background: rgba(15, 23, 42, 0.75);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--accent-strong);
+        color: #e5edff;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.7);
+      }
+
+      .btn-ghost {
+        background: rgba(15, 23, 42, 0.5);
+        border-color: rgba(148, 163, 184, 0.4);
+        color: var(--text-soft);
+      }
+
+      .btn-ghost:hover {
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--text);
+      }
+
+      .hero {
+        margin-top: 32px;
+        margin-bottom: 40px;
+      }
+
+      .hero-main {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        gap: 32px;
+        align-items: center;
+        padding: 28px 26px;
+        border-radius: 32px;
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        background: radial-gradient(
+            circle at 0 0,
+            rgba(37, 99, 235, 0.26),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 110% -10%,
+            rgba(147, 197, 253, 0.2),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 0 130%,
+            rgba(55, 65, 81, 0.6),
+            transparent 65%
+          ),
+          rgba(15, 23, 42, 0.96);
+        box-shadow: var(--shadow-soft);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 10% 0,
+          rgba(96, 165, 250, 0.35),
+          transparent 50%
+        );
+        mix-blend-mode: soft-light;
+        opacity: 0.65;
+        pointer-events: none;
+      }
+
+      .hero-main > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-media {
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-photo {
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        padding: 4px;
+        background: conic-gradient(
+          from 210deg,
+          #60a5fa,
+          #a855f7,
+          #f97316,
+          #22c55e,
+          #60a5fa
+        );
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      }
+
+      .hero-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid rgba(15, 23, 42, 0.95);
+        background-color: #020617;
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .eyebrow {
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.1rem, 3vw, 2.7rem);
+      }
+
+      .hero-tagline {
+        font-size: 0.98rem;
+        color: var(--text);
+      }
+
+      .hero-location {
+        font-size: 0.9rem;
+        color: var(--text-soft);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .hero-highlights {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      .highlight {
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.6);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .highlight-label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--text-soft);
+      }
+
+      .highlight-value {
+        font-size: 0.86rem;
+        font-weight: 500;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .section-header {
+        margin-bottom: 20px;
+        max-width: 640px;
+      }
+
+      .section-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .section-header p {
+        color: var(--text-soft);
+      }
+
+      .section-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .section-grid.two-column {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      }
+
+      .section-grid.three-column {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .section-card {
+        padding: 18px 18px;
+        border-radius: var(--radius-md);
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-subtle);
+      }
+
+      .section-card--accent {
+        background: radial-gradient(
+            circle at 0 0,
+            rgba(59, 130, 246, 0.1),
+            transparent 55%
+          ),
+          var(--bg-elevated-soft);
+        border-color: rgba(59, 130, 246, 0.4);
+      }
+
+      .section-card h3 {
+        font-size: 1.05rem;
+      }
+
+      .bullet-list {
+        margin: 0;
+        padding-left: 1.15rem;
+        color: var(--text-muted);
+      }
+
+      .bullet-list li {
+        margin-bottom: 0.4rem;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 0.6rem;
+      }
+
+      .pill {
+        font-size: 0.75rem;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: #bfdbfe;
+        border: 1px solid rgba(59, 130, 246, 0.55);
+      }
+
+      .inline-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        color: var(--text-muted);
+      }
+
+      .inline-list li {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        font-size: 0.8rem;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding: 16px 18px 14px 18px;
+        border-radius: var(--radius-md);
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-subtle);
+      }
+
+      .timeline-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 0.4rem;
+      }
+
+      .timeline-header h3 {
+        font-size: 1.02rem;
+      }
+
+      .timeline-meta {
+        font-size: 0.82rem;
+        color: var(--text-soft);
+      }
+
+      .tag {
+        align-self: flex-start;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(59, 130, 246, 0.55);
+        color: #bfdbfe;
+      }
+
+      .section--contact .contact-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 18px;
+      }
+
+      .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .contact-label {
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--text-soft);
+      }
+
+      .contact-list a {
+        color: var(--accent-strong);
+      }
+
+      .contact-list a:hover {
+        text-decoration: underline;
+      }
+
+      .site-footer {
+        margin-top: 32px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(30, 64, 175, 0.7);
+        font-size: 0.8rem;
+        color: var(--text-soft);
+        text-align: center;
+      }
+
+      @media (max-width: 900px) {
+        .site-header {
+          padding-inline: 14px;
+          border-radius: 20px;
+        }
+
+        .site-nav {
+          display: none;
+        }
+
+        .hero-main {
+          grid-template-columns: minmax(0, 1fr);
+          text-align: left;
+        }
+
+        .hero-media {
+          order: -1;
+        }
+
+        .hero-photo {
+          margin: 0 auto 8px;
+          width: 210px;
+          height: 210px;
+        }
+
+        .hero-highlights {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .section-grid.two-column,
+        .section-grid.three-column,
+        .skills-grid,
+        .section--contact .contact-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          padding-inline: 14px;
+        }
+
+        .hero-main {
+          padding: 20px 18px;
+        }
+
+        .section-card {
+          padding: 16px 14px;
+        }
+
+        .timeline-item {
+          padding-inline: 14px;
+        }
+
+        .hero-highlights {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <div class="logo-mark" aria-hidden="true">DK</div>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="btn btn-outline" href="mailto:dhruvkapur0301@gmail.com"
+          >Email</a
+        >
+      </header>
+
+      <main>
+        <section id="hero" class="hero">
+          <div class="hero-main">
+            <div class="hero-media">
+              <div class="hero-photo">
+                <img
+                  src="profile.png"
+                  alt="Professional headshot in a suit"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div class="hero-content">
+              <p class="eyebrow">Finance &amp; Business Analytics · Media · AI</p>
+              <h1>Dhruv Kapur</h1>
+              <p class="hero-tagline">
+                Sophomore, Class of 2028 at Kelley School of Business focused on
+                finance, business analytics, and media – founder of KFilms and
+                researcher at Wharton People Lab.
+              </p>
+              <p class="hero-location">
+                San Francisco Bay Area · Open to opportunities in finance,
+                investing, analytics, and media.
+              </p>
+              <div class="hero-actions">
+                <a
+                  class="btn btn-primary"
+                  href="mailto:dhruvkapur0301@gmail.com"
+                  >Get in touch</a
+                >
+                <a
+                  class="btn btn-ghost"
+                  href="https://www.linkedin.com/in/dhruv-kapur-video"
+                  target="_blank"
+                  rel="noreferrer"
+                  >View LinkedIn</a
+                >
+              </div>
+              <div class="hero-highlights" aria-label="Key highlights">
+                <div class="highlight">
+                  <span class="highlight-label">Wharton</span>
+                  <span class="highlight-value">People Lab Researcher</span>
+                </div>
+                <div class="highlight">
+                  <span class="highlight-label">Founder</span>
+                  <span class="highlight-value">KFilms Media</span>
+                </div>
+                <div class="highlight">
+                  <span class="highlight-label">Experience</span>
+                  <span class="highlight-value">Finance · Real Estate · Auto</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="section">
+          <div class="section-header">
+            <h2>About</h2>
+            <p>
+              A finance and business analytics student combining hands-on
+              investing experience, entrepreneurial media work, and technical
+              projects in AI and data.
+            </p>
+          </div>
+          <div class="section-grid two-column">
+            <div class="section-card">
+              <p>
+                At 13, Dhruv opened his first investment account and began
+                actively trading stocks. That early exposure to markets and
+                macroeconomics sparked a deep interest in finance that he is now
+                developing at Indiana University’s Kelley School of Business,
+                where he studies Finance and Business Analytics.
+              </p>
+              <p>
+                Beyond the classroom, Dhruv learns by building. He has founded a
+                media production company, grown an auto sales operation from
+                scratch, and designed AI-powered tools that streamline workflows
+                across real estate and automotive markets. Across each venture,
+                he brings a data-driven mindset, strong client empathy, and a
+                bias toward action.
+              </p>
+            </div>
+            <div class="section-card section-card--accent">
+              <h3>What Dhruv is excited about</h3>
+              <ul class="bullet-list">
+                <li>Applying data and AI to real-world investing decisions.</li>
+                <li>
+                  Bridging finance, analytics, and storytelling through media.
+                </li>
+                <li>
+                  Partnering with teams focused on talent, growth, and
+                  long-term value creation.
+                </li>
+                <li>
+                  Exploring roles in finance, business analytics, private
+                  equity, and entrepreneurship.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="experience" class="section">
+          <div class="section-header">
+            <h2>Experience</h2>
+            <p>
+              Roles that blend finance, analytics, entrepreneurship, and
+              storytelling.
+            </p>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <header class="timeline-header">
+                <div>
+                  <h3>Researcher · Wharton People Lab</h3>
+                  <p class="timeline-meta">
+                    The Wharton School · Dec 2025 – Present
+                  </p>
+                </div>
+                <span class="tag">AI &amp; People Analytics</span>
+              </header>
+              <p>
+                Helping build AI systems that rethink how organizations hire,
+                retain, and grow talent – from streamlining talent acquisition to
+                forecasting attrition risk and unlocking internal mobility at
+                scale.
+              </p>
+              <p>
+                Collaborates with CHROs and talent leaders across industries
+                including healthcare, logistics, and education, supporting
+                data-backed workforce strategies.
+              </p>
+            </article>
+
+            <article class="timeline-item">
+              <header class="timeline-header">
+                <div>
+                  <h3>Real Estate Media · Self-Employed</h3>
+                  <p class="timeline-meta">
+                    May 2025 – Present · San Francisco Bay Area
+                  </p>
+                </div>
+                <span class="tag">Media &amp; AI</span>
+              </header>
+              <p>
+                Provides professional photography, drone footage, and video
+                walkthroughs that have helped market and sell over $12M worth of
+                real estate.
+              </p>
+              <ul class="bullet-list">
+                <li>
+                  Built an AI photo processor using convolutional neural networks
+                  to align 5‑bracket HDR sets, perform exposure fusion and tone
+                  mapping, cutting editing time by 92%.
+                </li>
+                <li>
+                  Implemented a Zillow scraper in Python to process hundreds of
+                  listings per minute and target properties with underperforming
+                  photos for outreach.
+                </li>
+                <li>
+                  Grows the business through cold outreach, social media, and
+                  in‑person networking at open houses and realtor events.
+                </li>
+              </ul>
+            </article>
+
+            <article class="timeline-item">
+              <header class="timeline-header">
+                <div>
+                  <h3>Founder · KFilms</h3>
+                  <p class="timeline-meta">Jan 2024 – Present · California</p>
+                </div>
+                <span class="tag">Entrepreneurship</span>
+              </header>
+              <p>
+                Founded a media production company delivering high‑quality,
+                affordable promotional content for small businesses.
+              </p>
+              <ul class="bullet-list">
+                <li>
+                  Produces photography, video, animation, and graphic design for
+                  clients across the U.S. and internationally.
+                </li>
+                <li>
+                  Has collaborated with organizations such as Swiirl.io, MIT
+                  Mirchi, and NBA player Jerome Williams.
+                </li>
+                <li>
+                  Designs marketing assets, including business cards, to help
+                  clients present a cohesive brand.
+                </li>
+              </ul>
+            </article>
+
+            <article class="timeline-item">
+              <header class="timeline-header">
+                <div>
+                  <h3>Auto Sales · Self-Employed</h3>
+                  <p class="timeline-meta">
+                    Aug 2023 – Present · San Francisco Bay Area
+                  </p>
+                </div>
+                <span class="tag">Business &amp; Analytics</span>
+              </header>
+              <p>
+                Built a self-run auto sales business, purchasing, repairing, and
+                selling vehicles and generating approximately $70K in revenue.
+              </p>
+              <ul class="bullet-list">
+                <li>
+                  Negotiates purchase and sale prices to maximize margins while
+                  maintaining a 4.8‑star customer review average.
+                </li>
+                <li>
+                  Developed a Python-based market analysis tool to scrape and
+                  evaluate thousands of listings, identifying undervalued
+                  vehicles and pricing patterns.
+                </li>
+                <li>
+                  Manages end‑to‑end sales operations from advertising and
+                  photography to title transfer and post‑sale support.
+                </li>
+              </ul>
+            </article>
+
+            <article class="timeline-item">
+              <header class="timeline-header">
+                <div>
+                  <h3>Co‑Founder &amp; Tutor · Kapur Tutoring</h3>
+                  <p class="timeline-meta">
+                    Jun 2021 – Aug 2023 · Saratoga, CA
+                  </p>
+                </div>
+                <span class="tag">Leadership</span>
+              </header>
+              <p>
+                Co‑founded a tutoring organization serving students in the South
+                Bay Area, leading classes from 1:1 sessions up to 30‑student
+                groups.
+              </p>
+              <p>
+                Designed tailored lesson plans, including for students with
+                Autism and ADHD, improving engagement and academic outcomes.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="projects" class="section">
+          <div class="section-header">
+            <h2>Selected Projects</h2>
+            <p>
+              Hands‑on projects where finance, technology, and product thinking
+              intersect.
+            </p>
+          </div>
+
+          <div class="section-grid three-column">
+            <article class="section-card">
+              <h3>AI Real Estate Photo Pipeline</h3>
+              <p>
+                End‑to‑end HDR photo processing pipeline using convolutional
+                neural networks to align multi‑exposure image brackets and
+                perform exposure fusion, tone mapping, and color correction.
+              </p>
+              <p class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">CNNs</span>
+                <span class="pill">Computer Vision</span>
+              </p>
+            </article>
+
+            <article class="section-card">
+              <h3>Zillow Listing Scraper</h3>
+              <p>
+                Scraper that processes hundreds of listings per minute, extracts
+                key property attributes into Excel, and ranks homes where better
+                media can deliver outsized impact.
+              </p>
+              <p class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">Web Scraping</span>
+                <span class="pill">Lead Gen</span>
+              </p>
+            </article>
+
+            <article class="section-card">
+              <h3>Auto Market Analysis Tool</h3>
+              <p>
+                Data tool that scrapes and aggregates car listings to surface
+                pricing anomalies and undervalued vehicles, informing purchasing
+                and negotiation strategy.
+              </p>
+              <p class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">Pandas</span>
+                <span class="pill">Pricing Analytics</span>
+              </p>
+            </article>
+
+            <article class="section-card">
+              <h3>Biometric Bike Lock Prototype</h3>
+              <p>
+                Concepted and prototyped a biometric bike lock as part of NYU
+                Tandon’s “Computer Engineering for Good” program, focusing on
+                solving real‑world theft and security problems.
+              </p>
+              <p class="pill-row">
+                <span class="pill">Prototyping</span>
+                <span class="pill">Hardware</span>
+                <span class="pill">Teamwork</span>
+              </p>
+            </article>
+
+            <article class="section-card">
+              <h3>Portfolio Investing</h3>
+              <p>
+                Personal investment portfolio launched in 2019, exploring stocks,
+                cryptocurrencies, and options with a focus on risk management and
+                long‑term growth.
+              </p>
+              <p class="pill-row">
+                <span class="pill">Equities</span>
+                <span class="pill">Options</span>
+                <span class="pill">Risk Management</span>
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="skills" class="section">
+          <div class="section-header">
+            <h2>Skills</h2>
+            <p>A blend of finance, analytics, media, and technical skills.</p>
+          </div>
+          <div class="skills-grid">
+            <article class="section-card">
+              <h3>Finance &amp; Business</h3>
+              <ul class="inline-list">
+                <li>Financial analysis</li>
+                <li>Market research</li>
+                <li>Portfolio management</li>
+                <li>Pricing strategy</li>
+              </ul>
+            </article>
+            <article class="section-card">
+              <h3>Analytics &amp; Technical</h3>
+              <ul class="inline-list">
+                <li>Python</li>
+                <li>Data scraping</li>
+                <li>Computer vision</li>
+                <li>Excel &amp; spreadsheets</li>
+              </ul>
+            </article>
+            <article class="section-card">
+              <h3>Media &amp; Creative</h3>
+              <ul class="inline-list">
+                <li>Drone videography</li>
+                <li>Photography</li>
+                <li>Video editing</li>
+                <li>Graphic design</li>
+              </ul>
+            </article>
+            <article class="section-card">
+              <h3>People &amp; Leadership</h3>
+              <ul class="inline-list">
+                <li>Client relationships</li>
+                <li>Teaching &amp; mentoring</li>
+                <li>Cold outreach</li>
+                <li>Team collaboration</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="education" class="section">
+          <div class="section-header">
+            <h2>Education</h2>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <header class="timeline-header">
+                <div>
+                  <h3>Indiana University – Kelley School of Business</h3>
+                  <p class="timeline-meta">
+                    B.S. in Finance &amp; Business · 2024 – 2028
+                  </p>
+                </div>
+                <span class="tag">Undergraduate</span>
+              </header>
+            </article>
+
+            <article class="timeline-item">
+              <header class="timeline-header">
+                <div>
+                  <h3>Saratoga High School</h3>
+                  <p class="timeline-meta">Aug 2020 – Jun 2024</p>
+                </div>
+                <span class="tag">High School</span>
+              </header>
+            </article>
+
+            <article class="timeline-item">
+              <header class="timeline-header">
+                <div>
+                  <h3>Foothill College</h3>
+                  <p class="timeline-meta">
+                    Object-Oriented Programming in Python · Jun 2021 – Aug 2021
+                  </p>
+                </div>
+                <span class="tag">Computer Science</span>
+              </header>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" class="section section--contact">
+          <div class="section-header">
+            <h2>Let’s Connect</h2>
+            <p>
+              Dhruv is always excited to meet people working in finance,
+              analytics, technology, and media.
+            </p>
+          </div>
+          <div class="contact-grid">
+            <div class="section-card">
+              <h3>Reach out</h3>
+              <ul class="contact-list">
+                <li>
+                  <span class="contact-label">Email</span>
+                  <a href="mailto:dhruvkapur0301@gmail.com"
+                    >dhruvkapur0301@gmail.com</a
+                  >
+                </li>
+                <li>
+                  <span class="contact-label">LinkedIn</span>
+                  <a
+                    href="https://www.linkedin.com/in/dhruv-kapur-video"
+                    target="_blank"
+                    rel="noreferrer"
+                    >linkedin.com/in/dhruv-kapur-video</a
+                  >
+                </li>
+                <li>
+                  <span class="contact-label">Location</span>
+                  <span>San Francisco Bay Area</span>
+                </li>
+              </ul>
+            </div>
+            <div class="section-card section-card--accent">
+              <h3>What to connect about</h3>
+              <ul class="bullet-list">
+                <li>Internships in finance, investing, or analytics.</li>
+                <li>Opportunities in media, content, or brand storytelling.</li>
+                <li>Collaborations at the intersection of AI and talent.</li>
+                <li>
+                  Advice or mentorship on entrepreneurship and side projects.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© <span id="year"></span> Dhruv Kapur. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+
