@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pratham Taparia | Informatics & Business</title>
+    <meta name="description" content="Pratham Taparia – Informatics & Business student at Indiana University Bloomington." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet" />
+    <style>
+:root{--bg:#0a0f1a;--bg-card:#121a2a;--accent:#3b82f6;--accent-hover:#60a5fa;--accent-muted:rgba(59,130,246,.12);--text:#f1f5f9;--text-muted:#94a3b8;--text-subtle:#64748b;--border:rgba(148,163,184,.2);--border-strong:rgba(148,163,184,.35);--radius:12px;--radius-lg:16px;--shadow:0 4px 24px rgba(0,0,0,.25);--transition:.2s ease}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:"DM Sans",system-ui,sans-serif;font-size:16px;line-height:1.6;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+.page{max-width:1100px;margin:0 auto;padding:0 24px 48px}
+.site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;margin:20px 0 32px;background:rgba(15,22,36,.85);border:1px solid var(--border);border-radius:var(--radius-lg);backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-family:Fraunces,serif;font-size:.85rem;font-weight:600;color:var(--text);background:var(--accent-muted);border:1px solid var(--border-strong)}
+.brand-name{font-family:Fraunces,serif;font-size:1rem;font-weight:600}
+.brand-tagline{font-size:.75rem;color:var(--text-muted)}
+.nav{display:flex;gap:4px}
+.nav a{padding:8px 14px;font-size:.875rem;font-weight:500;color:var(--text-muted);text-decoration:none;border-radius:8px;transition:color var(--transition),background var(--transition)}
+.nav a:hover{color:var(--text);background:var(--accent-muted)}
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start;padding:48px 0}
+.hero-kicker{display:inline-block;margin:0 0 16px;padding:6px 12px;font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-muted);border-radius:6px}
+.hero h1{margin:0 0 16px;font-family:Fraunces,serif;font-size:clamp(2.25rem,5vw,3rem);font-weight:600;line-height:1.15}
+.hero-highlight{color:var(--accent)}
+.hero-subtitle{margin:0 0 12px;font-size:1.0625rem;color:var(--text-muted);max-width:540px}
+.hero-location{margin:0 0 24px;font-size:.875rem;color:var(--text-subtle)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 20px;font-size:.9375rem;font-weight:500;text-decoration:none;border-radius:8px;transition:all var(--transition);cursor:pointer}
+.btn.primary{color:#fff;background:var(--accent);border:1px solid transparent}
+.btn.primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.btn.ghost{color:var(--text);background:transparent;border:1px solid var(--border-strong)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-aside{display:flex;flex-direction:column;gap:20px}
+.hero-photo-wrapper{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.hero-initials{display:flex;align-items:center;justify-content:center;min-height:220px;background:linear-gradient(135deg,var(--accent-muted) 0%,rgba(59,130,246,.08) 100%)}
+.hero-initials-text{font-family:Fraunces,serif;font-size:3.5rem;font-weight:600;color:var(--accent)}
+.hero-card{padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)}
+.hero-card h2{margin:0 0 12px;font-family:Fraunces,serif;font-size:1rem;font-weight:600}
+.hero-card ul{margin:0;padding-left:20px;font-size:.9375rem;color:var(--text-muted);line-height:1.7}
+.hero-card li+li{margin-top:6px}
+.section{padding:40px 0;border-top:1px solid var(--border)}
+.section-header{margin-bottom:28px}
+.section-header h2{margin:0 0 8px;font-family:Fraunces,serif;font-size:1.5rem;font-weight:600}
+.section-header p{margin:0;font-size:.9375rem;color:var(--text-muted)}
+.timeline{display:flex;flex-direction:column;gap:16px}
+.timeline-item{padding:20px 24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:border-color var(--transition)}
+.timeline-item:hover{border-color:var(--border-strong)}
+.timeline-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px;font-size:.8125rem;color:var(--text-subtle)}
+.timeline-date{font-weight:500;color:var(--text-muted)}
+.timeline h3{margin:0 0 4px;font-size:1rem;font-weight:600}
+.timeline-company{margin:0 0 8px;font-size:.875rem;color:var(--accent)}
+.timeline-body{margin:0;font-size:.9375rem;color:var(--text-muted);line-height:1.6}
+.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:border-color var(--transition)}
+.card:hover{border-color:var(--border-strong)}
+.card h3{margin:0 0 8px;font-size:1rem;font-weight:600}
+.card-subtitle{margin:0 0 4px;font-size:.875rem;color:var(--accent)}
+.card-meta{margin:0 0 12px;font-size:.8125rem;color:var(--text-subtle)}
+.card-body{margin:0;font-size:.9375rem;color:var(--text-muted);line-height:1.6}
+.section-contact{padding-bottom:60px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.contact-card{padding:28px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)}
+.contact-card h3{margin:0 0 12px;font-size:1rem;font-weight:600}
+.contact-card p{margin:0 0 20px;font-size:.9375rem;color:var(--text-muted);line-height:1.6}
+.contact-actions{display:flex;flex-wrap:wrap;gap:12px}
+.contact-details dl{margin:0;display:grid;gap:16px}
+.contact-details dt{font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-subtle)}
+.contact-details dd{margin:0;font-size:.9375rem}
+.contact-details a{color:var(--text);text-decoration:none}
+.contact-details a:hover{color:var(--accent)}
+.site-footer{padding:24px 0;font-size:.8125rem;color:var(--text-subtle);text-align:center;border-top:1px solid var(--border)}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-aside{order:-1;max-width:320px}.cards-grid,.contact-grid{grid-template-columns:1fr}}
+@media(max-width:720px){.site-header{flex-direction:column;align-items:stretch;gap:12px}.nav{flex-wrap:wrap}}
+@media(max-width:520px){.hero-actions{flex-direction:column}.btn{width:100%;justify-content:center}}
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <div class="brand">
+          <div class="brand-mark">PT</div>
+          <div class="brand-text">
+            <span class="brand-name">Pratham Taparia</span>
+            <span class="brand-tagline">Informatics & Business · Indiana University</span>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main class="site-main">
+        <section class="hero" id="about">
+          <div class="hero-content">
+            <p class="hero-kicker">Indiana University Bloomington</p>
+            <h1>Pratham <span class="hero-highlight">Taparia</span></h1>
+            <p class="hero-subtitle">
+              Hello, nice to meet you! I'm a sophomore majoring in Informatics with a minor in Business. I enjoy working on projects that combine technical thinking with real-world impact.
+            </p>
+            <p class="hero-location">Princeton, New Jersey · Open to internships in technology consulting, product, and related roles</p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn primary">Get in touch</a>
+              <a href="https://www.linkedin.com/in/prathamtaparia" target="_blank" rel="noreferrer" class="btn ghost">View LinkedIn</a>
+            </div>
+          </div>
+          <div class="hero-aside">
+            <div class="hero-photo-wrapper hero-initials"><span class="hero-initials-text">PT</span></div>
+            <div class="hero-card">
+              <h2>At a glance</h2>
+              <ul>
+                <li>Informatics & Business at Indiana University</li>
+                <li>Involved in professional and leadership organizations</li>
+                <li>Experience with teams, relationships, and ownership of initiatives</li>
+                <li>Exploring consulting, product, and tech roles</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="experience">
+          <div class="section-header">
+            <h2>Experience</h2>
+            <p>Professional and leadership roles across technology, consulting, and community.</p>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-meta"><span class="timeline-date">Dec 2025 – Present</span><span class="timeline-location">Bloomington, Indiana</span></div>
+              <h3>Vice President of External Affairs</h3>
+              <p class="timeline-company">Kappa Theta Pi – Indiana University</p>
+              <p class="timeline-body">Overseeing external partnerships and sponsorship outreach for Kappa Theta Pi. Initiating collaboration with campus organizations, alumni, and industry contacts. Developing a strategic roadmap for outreach and partnerships.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-meta"><span class="timeline-date">Sep 2025 – Present</span><span class="timeline-location">Bloomington, Indiana</span></div>
+              <h3>Consulting Intern</h3>
+              <p class="timeline-company">Luddy Consulting Association</p>
+              <p class="timeline-body">Assisting consulting teams on strategy and technology projects. Analyzing data and developing client deliverables under senior consultant mentorship.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-meta"><span class="timeline-date">Jan 2026 – Present</span><span class="timeline-location">Bloomington, Indiana</span></div>
+              <h3>Active Participant</h3>
+              <p class="timeline-company">Technology Consulting Awareness and Readiness Program (EY & Deloitte)</p>
+              <p class="timeline-body">Engaged in consulting readiness program. Participating in simulations and case interview preparation. Attending workshops led by industry professionals.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-meta"><span class="timeline-date">Apr 2025 – Present</span><span class="timeline-location">Bloomington, Indiana</span></div>
+              <h3>Vice President of Fundraising</h3>
+              <p class="timeline-company">Bloomington Ki Badtameezi</p>
+              <p class="timeline-body">Overseeing fundraising for a national nonprofit South Asian dance competition at IU. Secured sponsorships and led donor outreach.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-meta"><span class="timeline-date">Sep 2025 – Present</span><span class="timeline-location">Bloomington, Indiana</span></div>
+              <h3>Technical Production Committee Member</h3>
+              <p class="timeline-company">TEDxIndianaUniversity</p>
+              <p class="timeline-body">Collaborating on digital content and website for TEDx@IU. Training on production workflow for events with 600+ attendees.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-meta"><span class="timeline-date">Sep 2024 – Present</span><span class="timeline-location">Bloomington, Indiana</span></div>
+              <h3>Dancer</h3>
+              <p class="timeline-company">Hoosier Hamzath</p>
+              <p class="timeline-body">Member of Hoosier Hamzath, contributing to South Asian dance and cultural performance at Indiana University.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-meta"><span class="timeline-date">Apr 2025 – Dec 2025</span><span class="timeline-location">Bloomington, Indiana</span></div>
+              <h3>Active Member</h3>
+              <p class="timeline-company">Kappa Theta Pi</p>
+              <p class="timeline-body">Participated in resume workshops and speaker events. Led Python programming workshops. Emphasized networking within the tech community.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-meta"><span class="timeline-date">Apr 2023 – Aug 2024</span><span class="timeline-location">Princeton, New Jersey</span></div>
+              <h3>Lifeguard</h3>
+              <p class="timeline-company">LIFETIME Fitness</p>
+              <p class="timeline-body">Ensured swimmer safety. Maintained pool areas and chemical levels. Trained in CPR, AED, and First Aid.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section-grid" id="education">
+          <div class="section-header">
+            <h2>Education</h2>
+            <p>Academic background in informatics, business, and technology.</p>
+          </div>
+          <div class="cards-grid">
+            <article class="card">
+              <h3>Indiana University Bloomington</h3>
+              <p class="card-subtitle">Sophomore · Informatics · Minor in Business</p>
+              <p class="card-meta">Aug 2024 – May 2028</p>
+              <p class="card-body">Building technical, analytical, and leadership skills.</p>
+            </article>
+            <article class="card">
+              <h3>West Windsor-Plainsboro High School North</h3>
+              <p class="card-subtitle">High School Diploma</p>
+              <p class="card-meta">Sep 2020 – Jun 2024</p>
+              <p class="card-body">Completed secondary education in Princeton, New Jersey.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section-contact" id="contact">
+          <div class="section-header">
+            <h2>Contact</h2>
+            <p>Let's connect about internships, projects, or collaboration.</p>
+          </div>
+          <div class="contact-grid">
+            <div class="contact-card">
+              <h3>Reach out</h3>
+              <p>I'm actively exploring internships in technology consulting, product, and related roles.</p>
+              <div class="contact-actions">
+                <a href="mailto:prathamtaparia@gmail.com" class="btn primary">Email me</a>
+              </div>
+            </div>
+            <div class="contact-card contact-details">
+              <dl>
+                <div><dt>Email</dt><dd><a href="mailto:prathamtaparia@gmail.com">prathamtaparia@gmail.com</a></dd></div>
+                <div><dt>Location</dt><dd>Princeton, New Jersey</dd></div>
+                <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/prathamtaparia" target="_blank" rel="noreferrer">linkedin.com/in/prathamtaparia</a></dd></div>
+              </dl>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© <span id="year"></span> Pratham Taparia. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var y = document.getElementById("year");
+        if (y) y.textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>
