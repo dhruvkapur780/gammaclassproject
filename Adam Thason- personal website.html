@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Thason — ISE & AI Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #c0392b;
+  --red-light: #e74c3c;
+  --red-pale: #fdf2f1;
+  --gold: #c0392b;
+  --black: #0a0a0a;
+  --dark: #111111;
+  --dark2: #1a1a1a;
+  --ink: #f0ece8;
+  --muted: #9a8a80;
+  --border: rgba(192,57,43,0.18);
+  --shadow: 0 8px 40px rgba(192,57,43,0.18);
+  --card-bg: #161616;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+
+/* ─── CURSOR: fist ─── */
+#cursor{position:fixed;font-size:1.4rem;pointer-events:none;z-index:9999;transform:translate(-50%,-60%);transition:transform .15s;line-height:1;}
+#cursor-ring{position:fixed;width:40px;height:40px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s ease;opacity:.35;}
+
+  10%{opacity:.5;}
+  90%{opacity:.2;}
+  100%{opacity:0;transform:translateY(110vh) rotate(360deg) translateX(50px);}
+}
+
+/* ─── BRUSH STROKE DIVIDER ─── */
+.brush{width:100%;height:6px;background:linear-gradient(90deg,transparent,var(--red),var(--red-light),var(--red),transparent);opacity:.5;margin:0;}
+
+/* ─── PROGRESS ─── */
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--red-light),var(--gold));z-index:200;width:0;}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(192,57,43,.2);transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 4px 30px rgba(192,57,43,.12);}
+.nav-logo{font-family:'Noto Serif JP',serif;font-size:1.3rem;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:.08em;display:flex;align-items:center;gap:.5rem;}
+.nav-logo span{color:var(--red);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--red);transition:width .3s;}
+.nav-links a:hover{color:var(--red);}
+.nav-links a:hover::after{width:100%;}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem;max-width:900px;margin:0 auto;position:relative;overflow:hidden;background:var(--black);}
+/* japanese character watermark */
+.hero-kanji{position:absolute;right:0;top:50%;transform:translateY(-50%);font-family:'Noto Serif JP',serif;font-size:28vw;color:rgba(192,57,43,.04);line-height:1;pointer-events:none;user-select:none;font-weight:700;}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 65% at 85% 30%,rgba(192,57,43,.07) 0%,transparent 65%);}
+
+.hero-text{position:relative;z-index:1;}
+.hero-tag{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem;opacity:0;animation:slideUp .6s .2s ease forwards;}
+.hero-tag::before{content:'';display:block;width:26px;height:1px;background:var(--red);}
+h1{font-family:'Noto Serif JP',serif;font-size:clamp(3rem,5.5vw,6rem);font-weight:700;line-height:1.05;margin-bottom:1.4rem;opacity:0;animation:slideUp .7s .35s ease forwards;letter-spacing:.04em;}
+.hero-name{font-size:clamp(5rem,10vw,11rem) !important;line-height:.95 !important;letter-spacing:-.01em !important;margin-bottom:1.6rem !important;}
+.hero-name em{display:block;font-size:clamp(4rem,8vw,9rem) !important;color:var(--red) !important;}
+h1 em{font-style:normal;color:var(--red);}
+.hero-sub{font-size:.94rem;color:var(--muted);line-height:1.85;max-width:440px;margin-bottom:2.2rem;opacity:0;animation:slideUp .7s .5s ease forwards;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:slideUp .7s .65s ease forwards;}
+.btn-primary{background:var(--red);color:white;padding:.85rem 2rem;border-radius:3px;font-family:'Outfit',sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .25s;box-shadow:0 4px 22px rgba(192,57,43,.35);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-primary:hover{background:var(--red-light);transform:translateY(-2px);box-shadow:0 8px 32px rgba(192,57,43,.5);}
+.btn-outline{border:1.5px solid var(--red);color:var(--red);padding:.85rem 2rem;border-radius:3px;font-family:'Outfit',sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .25s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-outline:hover{background:var(--red);color:white;transform:translateY(-2px);}
+
+
+@keyframes slideUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── TICKER ─── */
+.ticker-wrap{background:linear-gradient(90deg,#1a0000,#3a0000,var(--red));overflow:hidden;padding:.85rem 0;}
+.ticker{display:flex;gap:4rem;width:max-content;animation:ticker 24s linear infinite;}
+.ticker-item{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.9);white-space:nowrap;display:flex;align-items:center;gap:1.5rem;}
+.ticker-item::after{content:'✦';opacity:.4;font-size:.45rem;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ─── SECTIONS ─── */
+section{padding:6rem 4rem;}
+.section-tag{font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem;}
+.section-tag::before{content:'';display:block;width:20px;height:1px;background:var(--red);}
+h2{font-family:'Noto Serif JP',serif;font-size:clamp(1.9rem,3.2vw,2.9rem);font-weight:400;line-height:1.15;margin-bottom:3rem;letter-spacing:.04em;}
+
+/* ─── PHILOSOPHY / SUMMARY ─── */
+.about-section{background:var(--dark);position:relative;overflow:hidden;}
+.about-kanji{position:absolute;right:-2rem;top:50%;transform:translateY(-50%);font-family:'Noto Serif JP',serif;font-size:18rem;color:rgba(192,57,43,.04);font-weight:700;pointer-events:none;line-height:1;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.about-text{font-size:.94rem;color:var(--muted);line-height:1.95;}
+.about-text p{margin-bottom:1.1rem;}
+.about-text p:last-child{margin:0;}
+.quote-block{border-left:3px solid var(--red);padding:1.2rem 1.5rem;margin:1.5rem 0;font-family:'Noto Serif JP',serif;font-size:1.05rem;color:var(--ink);line-height:1.65;font-style:italic;}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.pillar{background:rgba(255,255,255,.04);border:1px solid rgba(192,57,43,.15);border-radius:8px;padding:1.4rem 1.2rem;text-align:center;transition:all .3s;cursor:default;}
+.pillar:hover{background:rgba(192,57,43,.1);border-color:var(--red);transform:translateY(-4px);}
+.pillar-kanji{font-family:'Noto Serif JP',serif;font-size:2rem;color:var(--red);margin-bottom:.5rem;display:block;}
+.pillar-name{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+
+/* ─── DOJO / EXPERIENCE ─── */
+.exp-section{background:var(--black);}
+.exp-list{display:flex;flex-direction:column;gap:0;border:1px solid rgba(192,57,43,.15);border-radius:8px;overflow:hidden;}
+.exp-item{border-bottom:1px solid rgba(192,57,43,.12);}
+.exp-item:last-child{border-bottom:none;}
+.exp-header{display:flex;align-items:center;justify-content:space-between;padding:1.6rem 1.8rem;cursor:pointer;transition:background .2s;user-select:none;}
+.exp-header:hover{background:rgba(192,57,43,.05);}
+.exp-left{display:flex;align-items:center;gap:1.1rem;flex:1;}
+.exp-num{font-family:'Noto Serif JP',serif;font-size:1.1rem;color:rgba(192,57,43,.4);min-width:28px;transition:color .2s;}
+.exp-item.open .exp-num{color:var(--red);}
+.exp-org{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:.2rem;}
+.exp-role{font-family:'Noto Serif JP',serif;font-size:1.15rem;font-weight:400;color:var(--ink);}
+.exp-date{font-size:.7rem;color:var(--muted);flex-shrink:0;margin-left:1rem;text-align:center;min-width:90px;}
+.exp-chevron{width:20px;height:20px;flex-shrink:0;margin-left:.8rem;transition:transform .35s;color:rgba(192,57,43,.4);}
+.exp-item.open .exp-chevron{transform:rotate(180deg);color:var(--red);}
+.exp-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1),padding .3s;padding:0 1.8rem 0 4.5rem;}
+.exp-item.open .exp-body{max-height:300px;padding:0 1.8rem 1.6rem 4.5rem;}
+.exp-desc{font-size:.87rem;color:var(--muted);line-height:1.8;border-left:2px solid rgba(192,57,43,.3);padding-left:1rem;}
+
+/* ─── SKILLS ─── */
+.skills-section{background:var(--dark);}
+.skills-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem;}
+.filter-btn{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.2rem;border-radius:3px;border:1.5px solid rgba(192,57,43,.25);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));}
+.filter-btn:hover,.filter-btn.active{background:var(--red);color:white;border-color:var(--red);}
+.skills-grid{display:flex;flex-wrap:wrap;gap:.7rem;}
+.skill-pill{font-size:.78rem;padding:.5rem 1.1rem;border:1.5px solid rgba(192,57,43,.2);background:rgba(255,255,255,.03);color:var(--ink);transition:all .25s;cursor:default;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));}
+.skill-pill.accent{background:var(--red);color:white;border-color:var(--red);}
+.skill-pill:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(192,57,43,.25);border-color:var(--red);}
+.skill-pill.hidden{opacity:0;transform:scale(.8);pointer-events:none;transition:all .2s;}
+
+/* ─── DOJO / KARATE SECTION ─── */
+.dojo-section{
+  position:relative;overflow:hidden;
+  background:var(--dark2);
+  padding:5rem 4rem;
+  border-top:1px solid rgba(192,57,43,.15);
+  border-bottom:1px solid rgba(192,57,43,.15);
+}
+.dojo-section .section-tag::before{content:'🥋';}
+.dojo-section h2{color:var(--ink);}
+.dojo-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.dojo-text{font-size:.93rem;color:var(--muted);line-height:1.9;}
+.dojo-text p{margin-bottom:1rem;}
+.belt-display{display:flex;flex-direction:column;gap:.8rem;}
+.belt-label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+.belt-row{display:flex;align-items:center;gap:1rem;}
+.belt{height:22px;border-radius:2px;flex:1;position:relative;overflow:hidden;}
+.belt::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);}
+.belt-name{font-size:.72rem;color:var(--muted);min-width:80px;letter-spacing:.06em;}
+.belt-white{background:#e8e0d8;}
+.belt-yellow{background:#d4ac0d;}
+.belt-orange{background:#d35400;}
+.belt-red-b{background:var(--red);}
+.belt-brown{background:#7b5e3a;}
+.belt-black{background:#1a1a1a;border:1px solid rgba(255,255,255,.15);}
+
+/* KATA BREATHING EXERCISE */
+.kata-box{
+  background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.2);
+  border-radius:8px;padding:2.5rem 2rem;text-align:center;margin-top:2rem;
+}
+.kata-title{font-family:'Noto Serif JP',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.5rem;}
+.kata-sub{font-size:.8rem;color:var(--muted);margin-bottom:2rem;}
+.breath-circle{
+  width:120px;height:120px;border-radius:50%;
+  border:2px solid var(--red);margin:0 auto 1.5rem;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Serif JP',serif;font-size:.85rem;color:var(--red);
+  cursor:pointer;transition:all .4s ease;
+  position:relative;
+  box-shadow:0 0 0 0 rgba(192,57,43,.3);
+}
+.breath-circle.inhale{
+  transform:scale(1.35);
+  box-shadow:0 0 0 20px rgba(192,57,43,.1),0 0 40px rgba(192,57,43,.15);
+  border-color:var(--red-light);color:var(--red-light);
+}
+.breath-circle.exhale{
+  transform:scale(0.85);
+  box-shadow:0 0 0 0 rgba(192,57,43,0);
+}
+#breath-text{font-size:.78rem;color:var(--muted);}
+
+/* STRIKE COUNTER */
+.strike-box{
+  background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.2);
+  border-radius:8px;padding:2rem;text-align:center;
+}
+.strike-title{font-family:'Noto Serif JP',serif;font-size:1rem;color:var(--ink);margin-bottom:.4rem;}
+.strike-sub{font-size:.78rem;color:var(--muted);margin-bottom:1.5rem;}
+#strike-count{font-family:'Noto Serif JP',serif;font-size:4rem;color:var(--red);line-height:1;display:block;margin:.5rem 0;transition:transform .1s;}
+.strike-btn{
+  background:var(--red);color:white;border:none;width:80px;height:80px;border-radius:50%;
+  font-size:1.8rem;cursor:pointer;transition:all .15s;
+  box-shadow:0 4px 20px rgba(192,57,43,.4);
+  display:block;margin:0 auto;
+}
+.strike-btn:hover{background:var(--red-light);transform:scale(1.08);}
+.strike-btn:active{transform:scale(.93);}
+#strike-msg{font-size:.78rem;color:var(--muted);margin-top:.8rem;min-height:1.2rem;}
+
+/* ─── EDUCATION ─── */
+.edu-section{background:var(--black);}
+.edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.edu-card{background:var(--card-bg);padding:1.8rem 1.5rem;border-radius:6px;border-top:2px solid var(--red);transition:all .3s;cursor:default;position:relative;overflow:hidden;}
+.edu-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(192,57,43,.06),transparent);transition:height .3s;}
+.edu-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
+.edu-card:hover::before{height:100%;}
+.edu-school{font-family:'Noto Serif JP',serif;font-size:1.05rem;margin-bottom:.5rem;line-height:1.3;color:var(--ink);}
+.edu-degree{font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:.5rem;}
+.edu-years{font-size:.64rem;letter-spacing:.12em;color:var(--red);text-transform:uppercase;}
+
+/* ─── CONTACT ─── */
+.contact-section{background:var(--dark2);padding:6rem 4rem;text-align:center;border-top:1px solid rgba(192,57,43,.15);}
+.contact-section h2{margin-bottom:1rem;}
+.contact-sub{color:var(--muted);margin:0 auto 3rem;font-size:.94rem;line-height:1.8;max-width:440px;}
+.contact-cards{display:flex;justify-content:center;gap:1.3rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.contact-card{background:rgba(255,255,255,.04);border:1px solid rgba(192,57,43,.15);border-radius:8px;padding:1.5rem 1.8rem;transition:all .3s;cursor:default;}
+.contact-card:hover{background:rgba(192,57,43,.08);border-color:var(--red);transform:translateY(-4px);}
+.contact-card-icon{font-size:2rem;margin-bottom:.6rem;display:block;}
+.contact-card-label{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;}
+.contact-card-val{font-size:.86rem;color:var(--ink);}
+.contact-link{display:inline-flex;align-items:center;gap:.6rem;color:var(--red);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(192,57,43,.35);padding-bottom:3px;transition:all .2s;}
+.contact-link:hover{color:var(--red-light);border-color:var(--red-light);}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+footer{background:var(--black);border-top:1px solid rgba(192,57,43,.12);text-align:center;padding:1.5rem;color:rgba(255,255,255,.15);font-size:.7rem;letter-spacing:.12em;}
+
+@media(max-width:900px){
+  nav{padding:1.2rem 1.8rem;}
+  .hero{grid-template-columns:1fr;padding:7rem 1.8rem 3rem;}
+  .hero-visual{order:-1;}
+  section{padding:4rem 1.8rem;}
+  .about-grid{grid-template-columns:1fr;}
+  .dojo-grid{grid-template-columns:1fr;}
+  .edu-grid{grid-template-columns:1fr;}
+  .exp-date{display:none;}
+}
+@media(max-width:600px){.nav-links{display:none;}}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="cursor">👊</div>
+<div id="cursor-ring"></div>
+
+<nav id="navbar">
+  <a class="nav-logo" href="#">Adam<span> Thason</span></a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#dojo">Dojo</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-kanji">武</div>
+  <div class="hero-text">
+    <p class="hero-tag">Chicago · Indiana University</p>
+    <h1 class="hero-name">Adam<br><em>Thason</em></h1>
+    <p class="hero-sub">Intelligent Systems Engineering student at IU Luddy School — aspiring AI researcher, Kyokushin Karate practitioner, and builder of things that matter.</p>
+    <div class="hero-actions">
+      <a href="https://www.linkedin.com/in/adamthason" target="_blank" class="btn-primary">LinkedIn ↗</a>
+      <a href="#philosophy" class="btn-outline">My Philosophy</a>
+    </div>
+  </div>
+</section>
+
+<div class="brush"></div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">AI Research</span>
+    <span class="ticker-item">Intelligent Systems Engineering</span>
+    <span class="ticker-item">Kyokushin Karate</span>
+    <span class="ticker-item">Imazaki Dojo Chicago</span>
+    <span class="ticker-item">Ethical AI</span>
+    <span class="ticker-item">IU Luddy School</span>
+    <span class="ticker-item">Strategic Problem Solving</span>
+    <span class="ticker-item">Honor · Confidence · Generosity</span>
+    <span class="ticker-item">AI Research</span>
+    <span class="ticker-item">Intelligent Systems Engineering</span>
+    <span class="ticker-item">Kyokushin Karate</span>
+    <span class="ticker-item">Imazaki Dojo Chicago</span>
+    <span class="ticker-item">Ethical AI</span>
+    <span class="ticker-item">IU Luddy School</span>
+    <span class="ticker-item">Strategic Problem Solving</span>
+    <span class="ticker-item">Honor · Confidence · Generosity</span>
+  </div>
+</div>
+
+<!-- PHILOSOPHY / ABOUT -->
+<section class="about-section reveal" id="philosophy">
+  <div class="about-kanji">道</div>
+  <div class="section-tag">The Way</div>
+  <h2>Philosophy &amp;<br>Principles</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>My academic interests lie in Artificial Intelligence, strategic problem-solving, and self-improvement. I aspire to become an AI researcher, exploring its ethical implications, practical applications, and its pivotal role in shaping the future.</p>
+      <div class="quote-block">"I find solace in challenging environments that encourage critical thinking, strategic adaptability, and continuous personal growth."</div>
+      <p>Beyond academia, Kyokushin Karate at Imazaki Dojo has instilled profound values: perseverance, discipline, and mental fortitude — principles that shape everything I do.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-kanji">名</span>
+        <div class="pillar-name">Honor</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-kanji">信</span>
+        <div class="pillar-name">Confidence</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-kanji">義</span>
+        <div class="pillar-name">Generosity</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-kanji">道</span>
+        <div class="pillar-name">The Way</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brush"></div>
+
+<!-- EXPERIENCE -->
+<section class="exp-section reveal" id="experience">
+  <div class="section-tag">Journey</div>
+  <h2>Experience &amp;<br>Involvement</h2>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-header" onclick="toggleExp(this)">
+        <div class="exp-left">
+          <span class="exp-num">01</span>
+          <div>
+            <div class="exp-org">Indiana University · Luddy School</div>
+            <div class="exp-role">ISE Student — AI Track</div>
+          </div>
+        </div>
+        <span class="exp-date">Aug 2024 – May 2028</span>
+        <svg class="exp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="exp-body"><p class="exp-desc">Pursuing a Bachelor's in Intelligent Systems Engineering with a focus on AI research, ethical implications, and practical applications of machine intelligence. Engaged in coursework spanning algorithms, systems design, and applied AI.</p></div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-header" onclick="toggleExp(this)">
+        <div class="exp-left">
+          <span class="exp-num">02</span>
+          <div>
+            <div class="exp-org">Imazaki Dojo · Chicago</div>
+            <div class="exp-role">Kyokushin Karate Practitioner</div>
+          </div>
+        </div>
+        <span class="exp-date">Ongoing</span>
+        <svg class="exp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="exp-body"><p class="exp-desc">Active practitioner of Kyokushin Karate — one of the most demanding full-contact martial arts. Training has instilled perseverance, discipline, and mental fortitude that directly inform my approach to AI research, leadership, and academic challenges.</p></div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-header" onclick="toggleExp(this)">
+        <div class="exp-left">
+          <span class="exp-num">03</span>
+          <div>
+            <div class="exp-org">DePaul College Prep</div>
+            <div class="exp-role">High School — STEM Focus</div>
+          </div>
+        </div>
+        <span class="exp-date">2020 – 2024</span>
+        <svg class="exp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="exp-body"><p class="exp-desc">Graduated from DePaul College Prep in Chicago, building a strong foundation in STEM disciplines while developing leadership, critical thinking, and strategic problem-solving skills.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section reveal" id="skills">
+  <div class="section-tag">Arsenal</div>
+  <h2>Technical &amp;<br>Core Skills</h2>
+  <div class="skills-filter">
+    <button class="filter-btn active" onclick="filterSkills('all',this)">All</button>
+    <button class="filter-btn" onclick="filterSkills('ai',this)">AI & CS</button>
+    <button class="filter-btn" onclick="filterSkills('leadership',this)">Leadership</button>
+    <button class="filter-btn" onclick="filterSkills('martial',this)">Martial Arts</button>
+  </div>
+  <div class="skills-grid">
+    <span class="skill-pill accent" data-cat="ai">Artificial Intelligence</span>
+    <span class="skill-pill" data-cat="ai">C Programming</span>
+    <span class="skill-pill" data-cat="ai">GitHub</span>
+    <span class="skill-pill" data-cat="ai">Intelligent Systems</span>
+    <span class="skill-pill" data-cat="ai">Ethical AI</span>
+    <span class="skill-pill" data-cat="ai">Algorithm Design</span>
+    <span class="skill-pill" data-cat="ai">Systems Engineering</span>
+    <span class="skill-pill accent" data-cat="leadership">Strategic Thinking</span>
+    <span class="skill-pill" data-cat="leadership">Problem Solving</span>
+    <span class="skill-pill" data-cat="leadership">Critical Thinking</span>
+    <span class="skill-pill" data-cat="leadership">Adaptability</span>
+    <span class="skill-pill" data-cat="leadership">Self-Improvement</span>
+    <span class="skill-pill accent" data-cat="martial">Kyokushin Karate</span>
+    <span class="skill-pill" data-cat="martial">Martial Arts Instruction</span>
+    <span class="skill-pill" data-cat="martial">Mental Fortitude</span>
+    <span class="skill-pill" data-cat="martial">Discipline</span>
+    <span class="skill-pill" data-cat="martial">Perseverance</span>
+  </div>
+</section>
+
+<!-- DOJO SECTION -->
+<section class="dojo-section reveal" id="dojo">
+  <div class="section-tag">The Dojo</div>
+  <h2>Kyokushin Karate</h2>
+  <div class="dojo-grid">
+    <div>
+      <div class="dojo-text">
+        <p>Kyokushin — meaning "the ultimate truth" — is one of the world's most demanding full-contact martial arts. Founded by Masutatsu Oyama, it demands not just physical strength but iron will and unwavering spirit.</p>
+        <p>Training at Imazaki Dojo in Chicago has been a cornerstone of Adam's character: the same focus required to execute a perfect kata translates directly into the precision needed for AI research and engineering.</p>
+      </div>
+      <div class="belt-display" style="margin-top:2rem;">
+        <div class="belt-label">Belt Progression — Kyokushin</div>
+        <div class="belt-row"><span class="belt-name">White</span><div class="belt belt-white"></div></div>
+        <div class="belt-row"><span class="belt-name">Yellow</span><div class="belt belt-yellow"></div></div>
+        <div class="belt-row"><span class="belt-name">Orange</span><div class="belt belt-orange"></div></div>
+        <div class="belt-row"><span class="belt-name">Red</span><div class="belt belt-red-b"></div></div>
+        <div class="belt-row"><span class="belt-name">Brown</span><div class="belt belt-brown"></div></div>
+        <div class="belt-row"><span class="belt-name">Black</span><div class="belt belt-black"></div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+      <!-- BREATHING EXERCISE -->
+      <div class="kata-box">
+        <div class="kata-title">Dojo Breathing — Ibuki</div>
+        <div class="kata-sub">Click to practice the Kyokushin power breath</div>
+        <div class="breath-circle" id="breathCircle" onclick="startBreath()">
+          <span id="breathLabel">Begin</span>
+        </div>
+        <div id="breath-text">Tap the circle to start</div>
+      </div>
+      <!-- STRIKE COUNTER -->
+      <div class="strike-box">
+        <div class="strike-title">Strike Trainer</div>
+        <div class="strike-sub">OSU! — Tap to land a strike</div>
+        <span id="strike-count">0</span>
+        <button class="strike-btn" onclick="addStrike()">👊</button>
+        <div id="strike-msg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brush"></div>
+
+<!-- EDUCATION -->
+<section class="edu-section reveal" id="education">
+  <div class="section-tag">Training Grounds</div>
+  <h2>Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-school">Indiana University<br>Luddy School</div>
+      <div class="edu-degree">B.S. Intelligent Systems Engineering<br>Focus: Artificial Intelligence</div>
+      <div class="edu-years">Aug 2024 – May 2028</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-school">DePaul College Prep</div>
+      <div class="edu-degree">High School Diploma<br>Chicago, Illinois</div>
+      <div class="edu-years">2020 – 2024</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-school">Francis Xavier Warde School</div>
+      <div class="edu-degree">Primary & Middle School<br>Chicago, Illinois</div>
+      <div class="edu-years">2009 – 2020</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section reveal" id="contact">
+  <div class="section-tag">連絡</div>
+  <h2>Connect</h2>
+  <p class="contact-sub">Interested in AI research, engineering, or just want to talk strategy — reach out. OSU! 🥋</p>
+  <div class="contact-cards">
+    <div class="contact-card">
+      <span class="contact-card-icon">🤖</span>
+      <div class="contact-card-label">Focus</div>
+      <div class="contact-card-val">AI Research & Ethics</div>
+    </div>
+    <div class="contact-card">
+      <span class="contact-card-icon">📍</span>
+      <div class="contact-card-label">Location</div>
+      <div class="contact-card-val">Chicago, IL & Bloomington, IN</div>
+    </div>
+    <div class="contact-card">
+      <span class="contact-card-icon">🥋</span>
+      <div class="contact-card-label">Dojo</div>
+      <div class="contact-card-val">Imazaki Dojo · Kyokushin</div>
+    </div>
+  </div>
+  <a class="contact-link" href="https://www.linkedin.com/in/adamthason" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    linkedin.com/in/adamthason
+  </a>
+</section>
+
+<footer>© 2026 Adam Thason · OSU! — The way of the warrior 🥋</footer>
+
+<script>
+// CURSOR
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+
+// PROGRESS
+const prog=document.getElementById('progress');
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(s/h*100)+'%';
+  document.getElementById('navbar').classList.toggle('scrolled',s>40);
+});
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ACCORDION
+function toggleExp(header){
+  const item=header.parentElement,wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.exp-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+// SKILLS FILTER
+function filterSkills(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.skill-pill').forEach(pill=>{
+    pill.classList.toggle('hidden',cat!=='all'&&pill.dataset.cat!==cat);
+  });
+}
+
+// STAGGER PILLARS
+const pilObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.querySelectorAll('.pillar').forEach((c,i)=>{c.style.transitionDelay=(i*.1)+'s';c.style.opacity='1';c.style.transform='translateY(0)';});}});},{threshold:.15});
+document.querySelectorAll('.about-section').forEach(s=>{
+  s.querySelectorAll('.pillar').forEach(c=>{c.style.opacity='0';c.style.transform='translateY(20px)';c.style.transition='opacity .5s ease,transform .5s ease,background .3s,border-color .3s';});
+  pilObs.observe(s);
+});
+
+// STAGGER EDU
+const eduObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.querySelectorAll('.edu-card').forEach((c,i)=>{c.style.transitionDelay=(i*.12)+'s';c.style.opacity='1';c.style.transform='translateY(0)';});}});},{threshold:.1});
+document.querySelectorAll('.edu-section').forEach(s=>{
+  s.querySelectorAll('.edu-card').forEach(c=>{c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition='opacity .55s ease,transform .55s ease,box-shadow .3s';});
+  eduObs.observe(s);
+});
+
+// BREATHING EXERCISE
+let breathing=false,breathTimer=null;
+const bc=document.getElementById('breathCircle'),bl=document.getElementById('breathLabel'),bt=document.getElementById('breath-text');
+function startBreath(){
+  if(breathTimer) return;
+  function cycle(){
+    bc.classList.remove('exhale');bc.classList.add('inhale');
+    bl.textContent='Inhale';bt.textContent='Breathe in deeply through the nose...';
+    breathTimer=setTimeout(()=>{
+      bc.classList.remove('inhale');
+      bl.textContent='Hold';bt.textContent='Hold your breath, focus your Ki...';
+      breathTimer=setTimeout(()=>{
+        bc.classList.add('exhale');
+        bl.textContent='Exhale';bt.textContent='Release through the mouth — OSU!';
+        breathTimer=setTimeout(()=>{
+          bc.classList.remove('exhale');
+          bl.textContent='Rest';bt.textContent='Click to go again';
+          breathTimer=null;
+        },3000);
+      },2000);
+    },4000);
+  }
+  cycle();
+}
+
+// STRIKE COUNTER
+let strikes=0;
+const strikeMsgs=['OSU!','Keep going!','Strong technique 💪','Feel the power!','Osu! Osu!','Kyokushin spirit! 🔥','Unstoppable! 🥋','100 strikes a day!','Masutatsu Oyama would approve 👊','LEGEND!'];
+function addStrike(){
+  strikes++;
+  const sc=document.getElementById('strike-count');
+  sc.textContent=strikes;sc.style.transform='scale(1.4)';
+  setTimeout(()=>sc.style.transform='scale(1)',120);
+  document.getElementById('strike-msg').textContent=strikeMsgs[Math.min(Math.floor(strikes/5),strikeMsgs.length-1)];
+  // shake screen briefly
+  document.body.style.transform='translateX(3px)';
+  setTimeout(()=>document.body.style.transform='translateX(-3px)',50);
+  setTimeout(()=>document.body.style.transform='',100);
+}
+</script>
+</body>
+</html>
