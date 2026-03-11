@@ -1,0 +1,393 @@
+/* Jorge Sebastian Diaz Diaz — Light, editorial, warm palette (distinct from dark Jake Cole site) */
+
+:root {
+  --bg: #f8f6f2;
+  --bg-alt: #efece6;
+  --ink: #1a1814;
+  --ink-muted: #5c564d;
+  --accent: #0d9488;
+  --accent-hover: #0f766e;
+  --accent-soft: #ccfbf1;
+  --paper: #ffffff;
+  --border: rgba(28, 25, 23, 0.12);
+  --radius: 12px;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-serif: "Libre Baskerville", Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--accent-hover);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.wrap.narrow {
+  max-width: 640px;
+}
+
+/* Masthead: minimal bar, no photo */
+.masthead {
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 0;
+}
+
+.masthead .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.logo:hover {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.nav a {
+  padding: 0.4rem 0.75rem;
+  color: var(--ink-muted);
+  border-radius: 999px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.nav a:hover {
+  color: var(--ink);
+  background: var(--bg-alt);
+  text-decoration: none;
+}
+
+/* Intro: centered, no two-column hero */
+.intro {
+  padding: 3.5rem 0 3rem;
+  text-align: center;
+}
+
+.intro-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+
+.intro-name {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.intro-title {
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+  margin: 0 0 0.25rem;
+}
+
+.intro-location {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  margin: 0 0 1.5rem;
+}
+
+.intro-cta {
+  margin-top: 1.25rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--accent);
+  color: var(--paper);
+  text-decoration: none;
+  border-color: var(--accent);
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--paper);
+  border-color: var(--accent);
+}
+
+.btn--primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--paper);
+}
+
+/* Blocks: alternating background, no timeline */
+.block {
+  padding: 2.5rem 0;
+}
+
+.block--alt {
+  background: var(--bg-alt);
+}
+
+.block--cta {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.block-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+  color: var(--ink);
+}
+
+.about-text {
+  line-height: 1.7;
+  color: var(--ink-muted);
+  margin: 0 0 0.75rem;
+}
+
+.about-meta {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* Experience: card grid (not timeline) */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(28, 25, 23, 0.08);
+  border-color: rgba(13, 148, 136, 0.25);
+}
+
+.card-header {
+  margin-bottom: 0.5rem;
+}
+
+.card-role {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+  color: var(--ink);
+}
+
+.card-org {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin: 0 0 0.2rem;
+}
+
+.card-date {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.card-meta,
+.card-desc {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* Education: list style */
+.edu-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.edu-item {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+}
+
+.edu-item h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+  color: var(--ink);
+}
+
+.edu-meta {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  margin: 0 0 0.4rem;
+}
+
+.edu-activities {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* Certifications: simple list with links */
+.cert-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.cert-list li {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+  padding-left: 0;
+}
+
+.cert-list a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Skills: inline tags */
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+}
+
+.skills-tags span {
+  display: inline-block;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+}
+
+.languages {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* Contact CTA */
+.block--cta p {
+  color: var(--ink-muted);
+  margin: 0 0 1rem;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 1rem 0;
+  background: var(--paper);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .masthead .wrap {
+    flex-wrap: wrap;
+  }
+
+  .nav {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .intro {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .block {
+    padding: 2rem 0;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    padding: 0 1rem;
+  }
+}
