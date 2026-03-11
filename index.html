@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shivani Kamineni | Student & Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a222c;
+      --text: #e8ecf1;
+      --text-muted: #8b9aad;
+      --accent: #3db4a8;
+      --accent-soft: rgba(61, 180, 168, 0.15);
+      --warm: #e8a87c;
+      --border: rgba(255, 255, 255, 0.06);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero */
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 0 6rem;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .hero-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .hero-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Sections */
+    section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    section h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: var(--text);
+    }
+
+    .about p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 56ch;
+    }
+
+    /* Experience & Education cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(61, 180, 168, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-org {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .card-role {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .cert {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .cert strong {
+      color: var(--text);
+    }
+
+    /* Contact */
+    .contact-list {
+      list-style: none;
+    }
+
+    .contact-list li {
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-list a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 3rem 0 4rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <p class="hero-label">Student · Research · Consulting</p>
+      <h1>Shivani Kamineni</h1>
+      <p class="hero-sub">Student @ Indiana University · Pittsburgh, PA</p>
+      <div class="hero-links">
+        <a href="mailto:shkami@iu.edu">shkami@iu.edu</a>
+        <a href="https://www.linkedin.com/in/shivani-kamineni" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </header>
+
+    <section class="about">
+      <h2>About</h2>
+      <p>
+        I'm a student at Indiana University with a focus on business, generative AI, and fintech. 
+        I work as an Undergraduate Research Assistant at the Kelley School of Business and lead consulting 
+        projects with TAMID Group. I'm passionate about technology, mental health advocacy, and building 
+        communities—currently serving in leadership roles with Kappa Theta Pi.
+      </p>
+    </section>
+
+    <section class="experience">
+      <h2>Experience</h2>
+
+      <div class="card">
+        <div class="card-org">Indiana University — Kelley School of Business</div>
+        <div class="card-role">Undergraduate Research Assistant</div>
+        <div class="card-meta">Jan 2025 – Present · Bloomington, IN</div>
+        <div class="card-desc">Generative AI + Fintech</div>
+      </div>
+
+      <div class="card">
+        <div class="card-org">TAMID Group at Indiana University</div>
+        <div class="card-role">Consulting Project Lead</div>
+        <div class="card-meta">Jan 2025 – Present · Bloomington, IN</div>
+      </div>
+
+      <div class="card">
+        <div class="card-org">Kappa Theta Pi — Indiana University</div>
+        <div class="card-role">Co-founder + VP of Internal Affairs · Mental Health Chair</div>
+        <div class="card-meta">Mar 2025 – Jan 2026 · Bloomington, IN</div>
+      </div>
+
+      <div class="card">
+        <div class="card-org">GE Vernova</div>
+        <div class="card-role">Ops + Digital Technology Intern</div>
+        <div class="card-meta">May 2025 – Aug 2025 · Atlanta, GA</div>
+      </div>
+
+      <div class="card">
+        <div class="card-org">Noble</div>
+        <div class="card-role">Startup Development Intern</div>
+        <div class="card-meta">Sep 2024 – Jan 2025 · New York City Metro</div>
+      </div>
+
+      <div class="card">
+        <div class="card-org">TAMID Group at Indiana University</div>
+        <div class="card-role">Tech Consultant</div>
+        <div class="card-meta">Jan 2024 – Dec 2024 · Bloomington, IN</div>
+      </div>
+
+      <div class="card">
+        <div class="card-org">Hoosier Consulting Network</div>
+        <div class="card-role">Strategy Consultant</div>
+        <div class="card-meta">Sep 2023 – Jan 2026 · Bloomington, IN</div>
+      </div>
+    </section>
+
+    <section class="education">
+      <h2>Education</h2>
+
+      <div class="card">
+        <div class="card-org">Indiana University Bloomington</div>
+        <div class="card-role">Bachelor's degree, Business</div>
+        <div class="card-meta">Aug 2023 – Jun 2027</div>
+      </div>
+
+      <div class="card">
+        <div class="card-org">Upper Saint Clair High School</div>
+        <div class="card-role">High School Diploma</div>
+        <div class="card-meta">Aug 2019 – Jun 2023</div>
+      </div>
+    </section>
+
+    <section class="skills">
+      <h2>Skills & Certifications</h2>
+      <div class="skills-grid">
+        <span class="skill-tag">Generative AI</span>
+        <span class="skill-tag">Fintech</span>
+        <span class="skill-tag">Consulting</span>
+        <span class="skill-tag">Strategy</span>
+        <span class="skill-tag">Digital Technology</span>
+      </div>
+      <div class="cert">
+        <strong>AI Fundamentals</strong> — Certification
+      </div>
+      <p style="margin-top: 1.25rem; color: var(--text-muted); font-size: 0.9rem;">
+        <strong style="color: var(--text);">Languages:</strong> English (Native) · Telugu (Native)
+      </p>
+    </section>
+
+    <section class="contact">
+      <h2>Contact</h2>
+      <ul class="contact-list">
+        <li><a href="mailto:shkami@iu.edu">shkami@iu.edu</a></li>
+        <li><a href="https://www.linkedin.com/in/shivani-kamineni" target="_blank" rel="noopener">LinkedIn — linkedin.com/in/shivani-kamineni</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      © 2025 Shivani Kamineni. Built with care.
+    </footer>
+  </div>
+</body>
+</html>
