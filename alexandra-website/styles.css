@@ -7,9 +7,10 @@
     --color-bg-alt: #f0eeeb;
     --color-text: #1a1a1a;
     --color-text-muted: #5c5c5c;
-    --color-accent: #2c4a6f;
-    --color-accent-light: #3d6b99;
+    --color-accent: #3a5885;
+    --color-accent-light: #4c7aa8;
     --color-border: #e0ddd8;
+    --glow-soft: 0 18px 45px rgba(58, 88, 133, 0.18);
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     --max-width: 960px;
@@ -31,7 +32,10 @@ body {
     font-size: 1rem;
     line-height: 1.6;
     color: var(--color-text);
-    background-color: var(--color-bg);
+    background:
+        radial-gradient(circle at top left, rgba(58, 88, 133, 0.18), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(90, 68, 118, 0.16), transparent 55%),
+        var(--color-bg);
 }
 
 /* Navigation */
@@ -76,6 +80,27 @@ body {
     color: var(--color-accent);
 }
 
+.nav-links a {
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.25rem;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition);
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -90,6 +115,18 @@ body {
     width: 24px;
     height: 2px;
     background: var(--color-text);
+}
+
+.nav-toggle.is-active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.is-active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Hero */
@@ -120,6 +157,13 @@ body {
     color: var(--color-text);
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
+}
+
+.hero-name span {
+    background-image: linear-gradient(120deg, var(--color-accent), var(--color-accent-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .hero-tagline {
@@ -193,8 +237,8 @@ body {
 /* About */
 .about-grid {
     display: grid;
-    grid-template-columns: 480px 1fr;
-    gap: 3rem;
+    grid-template-columns: 360px 1fr;
+    gap: 2.5rem;
     align-items: start;
 }
 
@@ -215,7 +259,8 @@ body {
 
 .profile-photo {
     width: 100%;
-    min-width: 400px;
+    max-width: 360px;
+    min-width: 320px;
     aspect-ratio: 1;
     object-fit: cover;
     border-radius: 8px;
@@ -242,6 +287,19 @@ body {
     background: white;
     border-radius: 8px;
     border: 1px solid var(--color-border);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transition:
+        box-shadow var(--transition),
+        transform var(--transition),
+        border-color var(--transition),
+        background-color var(--transition);
+}
+
+.timeline-item:hover {
+    box-shadow: var(--glow-soft);
+    transform: translateY(-4px);
+    border-color: rgba(58, 88, 133, 0.25);
+    background-color: #ffffff;
 }
 
 .timeline-date {
@@ -281,11 +339,16 @@ body {
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--color-border);
-    transition: box-shadow var(--transition);
+    transition:
+        box-shadow var(--transition),
+        transform var(--transition),
+        border-color var(--transition);
 }
 
 .project-card:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+    border-color: rgba(58, 88, 133, 0.25);
 }
 
 .project-image {
@@ -332,6 +395,19 @@ body {
     background: white;
     border-radius: 8px;
     border: 1px solid var(--color-border);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transition:
+        box-shadow var(--transition),
+        transform var(--transition),
+        border-color var(--transition),
+        background-color var(--transition);
+}
+
+.skill-category:hover {
+    box-shadow: var(--glow-soft);
+    transform: translateY(-4px);
+    border-color: rgba(58, 88, 133, 0.25);
+    background-color: #ffffff;
 }
 
 .skill-category h4 {
@@ -368,6 +444,21 @@ body {
 
 .contact-link:hover {
     text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Reveal on scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.6s var(--transition),
+        transform 0.6s var(--transition);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Footer */

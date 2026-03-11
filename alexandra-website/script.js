@@ -11,3 +11,34 @@ if (navToggle) {
         navToggle.classList.toggle('is-active');
     });
 }
+
+// Reveal on scroll
+const revealElements = document.querySelectorAll(
+    '.section, .timeline-item, .skill-category'
+);
+
+if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.22,
+        }
+    );
+
+    revealElements.forEach((el) => {
+        el.classList.add('reveal');
+        observer.observe(el);
+    });
+} else {
+    // Fallback: show all content if IntersectionObserver is not supported
+    revealElements.forEach((el) => {
+        el.classList.add('is-visible');
+    });
+}
