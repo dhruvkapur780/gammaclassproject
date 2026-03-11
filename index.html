@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sankalpa Hegde | Tech Consulting & Informatics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #12121a;
+      --accent: #8b5cf6;
+      --accent-strong: #a855f7;
+      --accent-soft: rgba(139, 92, 246, 0.2);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --border: #1e293b;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --nav-height: 72px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ----- Navigation ----- */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent-strong); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 1px;
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+
+    /* ----- Hero ----- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--nav-height) + 48px) 24px 80px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+                  linear-gradient(180deg, var(--bg) 0%, #0d0d14 100%);
+    }
+    .hero-inner {
+      max-width: 720px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      background: linear-gradient(120deg, #a855f7, #22d3ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 12px;
+    }
+    .hero-loc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .btn-primary, .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 999px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #fff;
+      border: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(139, 92, 246, 0.4);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--muted);
+      transform: translateY(-2px);
+    }
+
+    /* ----- Sections ----- */
+    section.page-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    .section-head {
+      margin-bottom: 40px;
+    }
+    .section-head h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .section-head p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+      margin-bottom: 8px;
+    }
+
+    /* About */
+    #about .about-text {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+      max-width: 640px;
+    }
+    .about-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .about-chips span {
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    /* Experience timeline */
+    .timeline {
+      border-left: 2px solid var(--border);
+      padding-left: 24px;
+      margin-left: 6px;
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 32px;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -30px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-strong);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+    .timeline-role {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .timeline-org {
+      font-size: 0.95rem;
+      color: var(--accent-strong);
+      margin-bottom: 4px;
+    }
+    .timeline-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .timeline-points {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .timeline-points li {
+      margin-left: 18px;
+      margin-bottom: 4px;
+      list-style: disc;
+    }
+
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+    .skill-card h3 {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .skill-card ul li {
+      font-size: 0.95rem;
+      color: var(--text);
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+    }
+    .skill-card ul li:last-child { border-bottom: none; }
+
+    /* Contact strip */
+    #contact {
+      background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.06) 100%);
+      border-radius: var(--radius-lg);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    #contact .section-head { margin-bottom: 28px; }
+    #contact .section-head p { max-width: 480px; margin: 0 auto; }
+    .contact-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .site-footer a { color: var(--accent-strong); }
+    .site-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Sankalpa <span>Hegde</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+      <button class="nav-toggle" aria-label="Open menu" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-badge">Technology Consulting · Product & Strategy</span>
+      <h1>Sankalpa <span>Hegde</span></h1>
+      <p class="hero-sub">Incoming Technology Consulting Intern at EY and Informatics major at Indiana University Bloomington—focused on technology, strategy, and impact.</p>
+      <p class="hero-loc">New York City Metropolitan Area</p>
+      <div class="hero-btns">
+        <a href="mailto:sankalpa.hegde21@gmail.com" class="btn-primary">Email me</a>
+        <a href="https://www.linkedin.com/in/sankalpa-hegde" target="_blank" rel="noreferrer" class="btn-secondary">LinkedIn</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="page-section">
+    <div class="section-head">
+      <p class="section-label">About</p>
+      <h2>Background</h2>
+      <p>Junior at Indiana University, majoring in Informatics with a minor in Business and Marketing.</p>
+    </div>
+    <p class="about-text">I'm energized by technology-enabled transformation, cross-functional collaboration, and using data, design, and storytelling to drive impact for clients, communities, and organizations.</p>
+    <div class="about-chips">
+      <span>Technology Consulting</span>
+      <span>Product & Strategy</span>
+      <span>Risk & Financial Services</span>
+      <span>Entrepreneurial Mindset</span>
+    </div>
+  </section>
+
+  <section id="experience" class="page-section">
+    <div class="section-head">
+      <p class="section-label">Experience</p>
+      <h2>Work & Leadership</h2>
+      <p>Roles and programs across consulting, product, and campus organizations.</p>
+    </div>
+    <div class="timeline">
+      <article class="timeline-item">
+        <div class="timeline-role">Incoming Technology Consulting Intern</div>
+        <div class="timeline-org">EY · Technology Strategy Transformation Group</div>
+        <div class="timeline-meta">Oct 2025 – Present · New York City</div>
+        <p class="timeline-points">Joining the Service Line Technology Strategy Transformation group to help clients align technology investments with business outcomes and drive large-scale digital transformation.</p>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">Technology Consulting Launch Intern</div>
+        <div class="timeline-org">EY · Technology Strategy Transformation (TST)</div>
+        <div class="timeline-meta">Jun 2025 – Aug 2025 · New York City</div>
+        <ul class="timeline-points">
+          <li>Explored core consulting skill sets and supported technology strategy and transformation workstreams.</li>
+          <li>Collaborated with cross-functional teams and EY professionals on client service and delivery.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">Product Management Committee</div>
+        <div class="timeline-org">Technology Management Club at Kelley</div>
+        <div class="timeline-meta">Sep 2024 – Aug 2025 · Bloomington, IN</div>
+        <ul class="timeline-points">
+          <li>Connected with industry professionals and developed content on PM roles, responsibilities, and challenges.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">Technology Consultant</div>
+        <div class="timeline-org">Luddy Consulting Association</div>
+        <div class="timeline-meta">Mar 2024 – Aug 2025 · Bloomington, IN</div>
+        <ul class="timeline-points">
+          <li>Contributed to weekly meetings and team collaboration; earned 2nd place in a cross-organizational market penetration case competition.</li>
+          <li>Expanded the club's network through events and guest speakers.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">Marketing Associate</div>
+        <div class="timeline-org">The Women's Network at Indiana University</div>
+        <div class="timeline-meta">Feb 2024 – Aug 2025 · Bloomington, IN</div>
+        <ul class="timeline-points">
+          <li>Selected from 20+ applicants; created social media content and worked with VP of Marketing on event strategies.</li>
+          <li>Used Canva to grow engagement and the organization's digital presence.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">Technology Consulting Awareness and Readiness Program</div>
+        <div class="timeline-org">Deloitte & EY: TCARP</div>
+        <div class="timeline-meta">Jan 2025 – May 2025 · Bloomington, IN</div>
+        <p class="timeline-points">Joint program to build awareness and foundational skills for technology consulting careers.</p>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">Emerging Leaders Series – Risk Division</div>
+        <div class="timeline-org">Goldman Sachs</div>
+        <div class="timeline-meta">Aug 2024 – Jan 2025</div>
+        <ul class="timeline-points">
+          <li>Competitive program with virtual sessions and an in-person event in Salt Lake City; paired with an industry mentor.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">NFTE Fellow</div>
+        <div class="timeline-org">Network for Teaching Entrepreneurship (NFTE)</div>
+        <div class="timeline-meta">Jun 2024 – Aug 2024 · New York City</div>
+        <ul class="timeline-points">
+          <li>One of 7 fellows across U.S. regions (Mid-Atlantic); mentored students and presented at EY National Intern Day (~300 interns).</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">Expedition EY Participant</div>
+        <div class="timeline-org">EY</div>
+        <div class="timeline-meta">Feb 2024 – May 2024</div>
+        <ul class="timeline-points">
+          <li>Gamified virtual program exploring financial services careers; live sessions with EY professionals and scholarship opportunities.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">New Member</div>
+        <div class="timeline-org">Beta Alpha Psi International (BAP)</div>
+        <div class="timeline-meta">Jan 2024 – May 2024 · Bloomington, IN</div>
+        <ul class="timeline-points">
+          <li>Weekly finance workshops; networked with Big Four firms and guest speakers.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">Mentee</div>
+        <div class="timeline-org">Deloitte</div>
+        <div class="timeline-meta">Oct 2022 – May 2023 · New York City</div>
+        <ul class="timeline-points">
+          <li>Mentorship from Deloitte professionals; refined presentation skills and developed an entrepreneurial mindset.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">High School Summer Intern</div>
+        <div class="timeline-org">KPMG US</div>
+        <div class="timeline-meta">Jul 2022 – Aug 2022 · New York City</div>
+        <ul class="timeline-points">
+          <li>Content and campaigns on sustainable business practices; weekly networking with KPMG professionals.</li>
+        </ul>
+      </article>
+      <article class="timeline-item">
+        <div class="timeline-role">Intern</div>
+        <div class="timeline-org">Careers in Technology Education</div>
+        <div class="timeline-meta">May 2022 · Queens, NY</div>
+        <ul class="timeline-points">
+          <li>Led a student team to run a week-long conference on technology and business careers; recruited industry keynote speakers.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills" class="page-section">
+    <div class="section-head">
+      <p class="section-label">Skills & Education</p>
+      <h2>What I bring</h2>
+      <p>Tools, languages, certifications, and recognition.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Core skills</h3>
+        <ul>
+          <li>Microsoft Excel</li>
+          <li>Microsoft PowerPoint</li>
+          <li>Microsoft Word</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Languages</h3>
+        <ul>
+          <li>Konkani — Native</li>
+          <li>English — Native</li>
+          <li>Kannada — Limited</li>
+          <li>Hindi — Limited</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Certifications</h3>
+        <ul>
+          <li>Microsoft Office Specialist: PowerPoint 2016</li>
+          <li>Microsoft Office Specialist: Word 2016</li>
+          <li>NOCTI Accounting Certified</li>
+          <li>Career and Technical Education Certified</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Honors & awards</h3>
+        <ul>
+          <li>EY Youth Scholar Entrepreneur of the Year</li>
+          <li>Business Marketing Honor Society</li>
+          <li>NFTE Regional Youth Entrepreneurship Challenge Runner-Up</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Education</h3>
+        <ul>
+          <li>B.S. Informatics · Indiana University Bloomington (2023–2027)</li>
+          <li>Academy of Finance and Enterprise (2019–2023)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="page-section">
+    <div class="section-head">
+      <p class="section-label">Contact</p>
+      <h2>Let's connect</h2>
+      <p>Open to conversations about tech consulting, product strategy, and new opportunities.</p>
+    </div>
+    <div class="contact-btns">
+      <a href="mailto:sankalpa.hegde21@gmail.com" class="btn-primary">Email Sankalpa</a>
+      <a href="https://www.linkedin.com/in/sankalpa-hegde" target="_blank" rel="noreferrer" class="btn-secondary">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© 2025 Sankalpa Hegde · <a href="mailto:sankalpa.hegde21@gmail.com">sankalpa.hegde21@gmail.com</a></p>
+  </footer>
+
+  <script>
+    (function() {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (toggle && links) {
+        toggle.addEventListener('click', function() {
+          links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+          links.style.flexDirection = 'column';
+          links.style.position = 'absolute';
+          links.style.top = '72px';
+          links.style.right = '24px';
+          links.style.background = 'var(--bg-card)';
+          links.style.padding = '16px';
+          links.style.borderRadius = '12px';
+          links.style.border = '1px solid var(--border)';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
