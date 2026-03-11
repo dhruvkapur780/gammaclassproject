@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sri Ram Sai Vallabhaneni | Personal Website</title>
+    <meta
+      name="description"
+      content="Sri Ram Sai Vallabhaneni – Finance student at Kelley School of Business passionate about company management."
+    />
+    <style>
+      :root {
+        --bg0: #020617;
+        --bg1: #070b1b;
+        --card: rgba(15, 23, 42, 0.78);
+        --card2: rgba(15, 23, 42, 0.9);
+        --text: #e5e7eb;
+        --muted: rgba(229, 231, 235, 0.72);
+        --border: rgba(148, 163, 184, 0.22);
+        --accent: #38bdf8;
+        --accent2: #a855f7;
+        --good: #22c55e;
+        --shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+        color: var(--text);
+        background: radial-gradient(
+            circle at 20% 5%,
+            rgba(56, 189, 248, 0.22),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 90% 10%,
+            rgba(168, 85, 247, 0.18),
+            transparent 60%
+          ),
+          radial-gradient(circle at 50% 120%, rgba(34, 197, 94, 0.12), transparent
+                55%),
+          linear-gradient(180deg, var(--bg1), var(--bg0));
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 18px 18px 54px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        margin: 0 -18px 18px;
+        padding: 12px 18px;
+        background: linear-gradient(
+          180deg,
+          rgba(2, 6, 23, 0.92),
+          rgba(2, 6, 23, 0.55)
+        );
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .brand-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        box-shadow: 0 0 18px rgba(56, 189, 248, 0.55);
+        flex: 0 0 auto;
+      }
+
+      .brand-name {
+        font-size: 13px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .nav a {
+        color: var(--muted);
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        background: rgba(15, 23, 42, 0.15);
+      }
+      .nav a:hover {
+        color: var(--text);
+        border-color: rgba(56, 189, 248, 0.32);
+        background: rgba(15, 23, 42, 0.45);
+        text-decoration: none;
+      }
+
+      .nav a.is-active {
+        color: rgba(224, 242, 254, 0.95);
+        border-color: rgba(56, 189, 248, 0.45);
+        background: rgba(56, 189, 248, 0.08);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 22px;
+        align-items: stretch;
+        margin: 14px 0 24px;
+      }
+
+      @media (max-width: 920px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: linear-gradient(
+          135deg,
+          rgba(15, 23, 42, 0.92),
+          rgba(15, 23, 42, 0.72)
+        );
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .card.glass {
+        background: linear-gradient(
+          135deg,
+          rgba(15, 23, 42, 0.9),
+          rgba(15, 23, 42, 0.55)
+        );
+      }
+
+      .hero-left {
+        padding: 22px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-left:before {
+        content: "";
+        position: absolute;
+        inset: -120px -80px auto auto;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(
+          circle at 30% 30%,
+          rgba(56, 189, 248, 0.28),
+          transparent 65%
+        );
+        transform: rotate(18deg);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.22);
+        color: rgba(224, 242, 254, 0.92);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow-icon {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+      }
+
+      h1 {
+        margin: 12px 0 6px;
+        font-size: clamp(32px, 4.3vw, 44px);
+        letter-spacing: -0.04em;
+        line-height: 1.06;
+        position: relative;
+        z-index: 1;
+      }
+
+      .subtitle {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 15px;
+        max-width: 60ch;
+        position: relative;
+        z-index: 1;
+      }
+
+      .subcallout {
+        margin: 0 0 16px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        background: rgba(2, 6, 23, 0.22);
+        color: rgba(229, 231, 235, 0.88);
+        font-size: 13px;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .subcallout .dot {
+        width: 9px;
+        height: 9px;
+        margin-top: 4px;
+        border-radius: 999px;
+        background: var(--good);
+        box-shadow: 0 0 16px rgba(34, 197, 94, 0.35);
+        flex: 0 0 auto;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        margin-bottom: 18px;
+        color: var(--muted);
+        font-size: 13px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(2, 6, 23, 0.25);
+      }
+
+      .meta-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.75);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-size: 14px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        user-select: none;
+        transition: transform 160ms ease, box-shadow 160ms ease,
+          background-color 160ms ease, border-color 160ms ease;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        color: #061225;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        box-shadow: 0 14px 34px rgba(56, 189, 248, 0.28);
+      }
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 44px rgba(56, 189, 248, 0.36);
+        text-decoration: none;
+      }
+
+      .btn-ghost {
+        color: var(--text);
+        background: rgba(15, 23, 42, 0.5);
+        border-color: rgba(148, 163, 184, 0.34);
+      }
+      .btn-ghost:hover {
+        transform: translateY(-1px);
+        border-color: rgba(148, 163, 184, 0.55);
+        background: rgba(15, 23, 42, 0.75);
+        text-decoration: none;
+      }
+
+      .hero-right {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 14px;
+        padding: 16px;
+      }
+
+      .photo {
+        display: grid;
+        place-items: center;
+        padding: 14px;
+        border-radius: 16px;
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        background: rgba(2, 6, 23, 0.25);
+      }
+
+      .photo img {
+        width: min(250px, 100%);
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 999px;
+        border: 2px solid rgba(56, 189, 248, 0.55);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        background: rgba(15, 23, 42, 0.6);
+      }
+
+      .quick {
+        padding: 14px 14px 12px;
+        border-radius: 16px;
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        background: rgba(2, 6, 23, 0.25);
+      }
+
+      .quick-title {
+        margin: 0 0 10px;
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .pill {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 13px;
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        background: rgba(15, 23, 42, 0.5);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 22px;
+        align-items: start;
+        margin-top: 18px;
+      }
+
+      @media (max-width: 920px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .section[id] {
+        scroll-margin-top: 82px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .section-badge {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(224, 242, 254, 0.92);
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.22);
+        padding: 5px 10px;
+        border-radius: 999px;
+      }
+
+      .about p {
+        margin: 0;
+        color: var(--text);
+        font-size: 14px;
+      }
+      .about p + p {
+        margin-top: 10px;
+        color: var(--muted);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 12px;
+      }
+
+      .item {
+        border-radius: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        background: rgba(2, 6, 23, 0.2);
+        padding: 12px 12px 10px;
+      }
+
+      .item-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .role {
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .org {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 1px;
+      }
+
+      .whenwhere {
+        text-align: right;
+        color: var(--muted);
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      ul {
+        margin: 10px 0 0;
+        padding-left: 18px;
+        color: var(--text);
+        font-size: 13px;
+      }
+
+      li + li {
+        margin-top: 6px;
+        color: rgba(229, 231, 235, 0.9);
+      }
+
+      .footer {
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        opacity: 0.85;
+      }
+
+      .kpi {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      @media (max-width: 720px) {
+        .kpi {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      .kpi-card {
+        padding: 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        background: rgba(2, 6, 23, 0.22);
+      }
+
+      .kpi-num {
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: -0.02em;
+      }
+
+      .kpi-label {
+        margin-top: 4px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .cards2 {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .mini {
+        padding: 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        background: rgba(2, 6, 23, 0.2);
+      }
+
+      .mini h3 {
+        margin: 0;
+        font-size: 14px;
+        letter-spacing: -0.02em;
+      }
+
+      .mini p {
+        margin: 8px 0 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .reveal {
+          opacity: 0;
+          transform: translateY(10px);
+          transition: opacity 500ms ease, transform 500ms ease;
+        }
+        .reveal.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand" aria-label="Site brand">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <div class="brand-name">Sri Ram Sai Vallabhaneni</div>
+        </div>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+
+      <div class="hero">
+        <section class="card hero-left">
+          <div class="eyebrow">
+            <span class="eyebrow-icon" aria-hidden="true"></span>
+            Kelley School of Business · Accounting &amp; Finance
+          </div>
+
+          <h1>Sri Ram Sai Vallabhaneni</h1>
+          <p class="subtitle">
+            Finance student at the Kelley School of Business passionate about
+            company management.
+          </p>
+
+          <div class="subcallout">
+            <span class="dot" aria-hidden="true"></span>
+            <div>
+              Interested in roles that combine <strong>finance</strong>,
+              <strong>analytics</strong>, and real-world problem solving.
+            </div>
+          </div>
+
+          <div class="meta" aria-label="Quick facts">
+            <span><span class="meta-dot" aria-hidden="true"></span>Bloomington, Indiana, United States</span>
+            <span>
+              <span class="meta-dot" aria-hidden="true"></span>
+              <a href="https://www.linkedin.com/in/srsv" target="_blank" rel="noreferrer">linkedin.com/in/srsv</a>
+            </span>
+          </div>
+
+          <div class="actions" aria-label="Primary actions">
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/srsv" target="_blank" rel="noreferrer">
+              View LinkedIn
+            </a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          </div>
+
+          <div class="kpi" aria-label="Highlights at a glance">
+            <div class="kpi-card">
+              <div class="kpi-num">34%</div>
+              <div class="kpi-label">Avg performance lift (content)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-num">2</div>
+              <div class="kpi-label">Internships completed</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-num">3</div>
+              <div class="kpi-label">Languages (Telugu, English, Hindi)</div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="card hero-right" aria-label="Profile photo and highlights">
+          <div class="photo">
+            <img src="assets/profile.png" alt="Profile photo of Sri Ram Sai Vallabhaneni" />
+          </div>
+          <div class="quick">
+            <div class="quick-title">Highlights</div>
+            <div class="pill-row">
+              <span class="pill">Excel</span>
+              <span class="pill">Analytics</span>
+              <span class="pill">SEO</span>
+              <span class="pill">Finance</span>
+              <span class="pill">Accounting</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="grid">
+        <section id="about" class="card section about reveal">
+          <div class="section-head">
+            <h2 class="section-title">About</h2>
+            <span class="section-badge">Profile</span>
+          </div>
+          <p>
+            I’m a finance student at Indiana University’s Kelley School of
+            Business, studying Accounting and Finance (BS, 2027). I’m passionate
+            about company management and learning how businesses grow through
+            strong execution and clear decision-making.
+          </p>
+          <p>
+            I enjoy working with data and improving outcomes—whether that’s
+            content performance through analytics or supporting projects in
+            fast-moving environments.
+          </p>
+        </section>
+
+        <section id="skills" class="card section reveal">
+          <div class="section-head">
+            <h2 class="section-title">Skills</h2>
+            <span class="section-badge">Snapshot</span>
+          </div>
+          <div class="pill-row" aria-label="Top skills">
+            <span class="pill" style="border-color: rgba(56, 189, 248, 0.45)">Microsoft Excel</span>
+            <span class="pill">Analytics &amp; Reporting</span>
+            <span class="pill">SEO &amp; Keyword Research</span>
+            <span class="pill">Content Optimization</span>
+          </div>
+          <div style="height: 10px"></div>
+          <div class="section-title" style="margin: 0 0 10px">Languages</div>
+          <div class="pill-row" aria-label="Languages">
+            <span class="pill">Telugu (Native/Bilingual)</span>
+            <span class="pill">English (Native/Bilingual)</span>
+            <span class="pill">Hindi (Native/Bilingual)</span>
+          </div>
+        </section>
+      </div>
+
+      <section id="experience" class="card section reveal" style="margin-top: 22px">
+        <div class="section-head">
+          <h2 class="section-title">Experience</h2>
+          <span class="section-badge">Roles</span>
+        </div>
+
+        <div class="timeline">
+          <article class="item">
+            <div class="item-top">
+              <div>
+                <div class="role">Marketing Intern</div>
+                <div class="org">NareshIT</div>
+              </div>
+              <div class="whenwhere">
+                <div>Dec 2023 – Jan 2024</div>
+                <div>Hyderabad, Telangana, India</div>
+              </div>
+            </div>
+            <ul>
+              <li>
+                Strengthened blog content with SEO and keyword research to help
+                drive site traffic.
+              </li>
+              <li>
+                Used Google Search Console analytics to identify low-performing
+                content and recommend improvements, increasing performance by an
+                average of <strong>34%</strong>.
+              </li>
+            </ul>
+          </article>
+
+          <article class="item">
+            <div class="item-top">
+              <div>
+                <div class="role">Intern</div>
+                <div class="org">Popuri Engineering &amp; Consultancy Services</div>
+              </div>
+              <div class="whenwhere">
+                <div>May 2023 – Jul 2023</div>
+                <div>Telangana, India</div>
+              </div>
+            </div>
+            <ul>
+              <li>
+                Supported internship work across engineering and consultancy
+                initiatives in a professional project setting.
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="education" class="card section reveal" style="margin-top: 22px">
+        <div class="section-head">
+          <h2 class="section-title">Education</h2>
+          <span class="section-badge">Academic</span>
+        </div>
+
+        <div class="timeline">
+          <article class="item">
+            <div class="item-top">
+              <div>
+                <div class="role">Indiana University – Kelley School of Business</div>
+                <div class="org">BS, Accounting and Finance</div>
+              </div>
+              <div class="whenwhere">
+                <div>Aug 2023 – May 2027</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="item-top">
+              <div>
+                <div class="role">Delhi Public School – India</div>
+                <div class="org">High School</div>
+              </div>
+              <div class="whenwhere">
+                <div>Jun 2021 – Feb 2022</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="card section glass reveal" style="margin-top: 22px">
+        <div class="section-head">
+          <h2 class="section-title">Contact</h2>
+          <span class="section-badge">Let’s connect</span>
+        </div>
+
+        <div class="cards2" aria-label="Contact options">
+          <div class="mini">
+            <h3>LinkedIn</h3>
+            <p>
+              Best way to reach me for opportunities, collaborations, or a quick
+              introduction.
+            </p>
+            <div class="actions" style="margin-top: 12px">
+              <a class="btn btn-primary" href="https://www.linkedin.com/in/srsv" target="_blank" rel="noreferrer">
+                Message on LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        <span>© <span id="year"></span> Sri Ram Sai Vallabhaneni</span>
+        <span>
+          Based on LinkedIn:
+          <a href="https://www.linkedin.com/in/srsv" target="_blank" rel="noreferrer">srsv</a>
+        </span>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const navLinks = Array.from(document.querySelectorAll(".nav a"));
+      const sections = navLinks
+        .map((a) => document.querySelector(a.getAttribute("href")))
+        .filter(Boolean);
+
+      const setActive = (id) => {
+        navLinks.forEach((a) => {
+          const href = a.getAttribute("href");
+          a.classList.toggle("is-active", href === `#${id}`);
+        });
+      };
+
+      if ("IntersectionObserver" in window && sections.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((e) => e.isIntersecting)
+              .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0))[0];
+            if (visible?.target?.id) setActive(visible.target.id);
+          },
+          { rootMargin: "-20% 0px -70% 0px", threshold: [0.08, 0.12, 0.18] }
+        );
+        sections.forEach((s) => io.observe(s));
+      }
+
+      const revealEls = Array.from(document.querySelectorAll(".reveal"));
+      if ("IntersectionObserver" in window && revealEls.length) {
+        const rio = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) e.target.classList.add("is-visible");
+            });
+          },
+          { threshold: 0.12 }
+        );
+        revealEls.forEach((el) => rio.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>
+
