@@ -1,193 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grace Friedman — Personal Website</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshita Mogulla | Technology & Consulting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f1419;
+            --bg-secondary: #1a2332;
+            --accent: #c9a962;
+            --accent-muted: #a68b4b;
+            --text-primary: #f4f1ea;
+            --text-secondary: #b8b5ae;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .serif { font-family: 'Cormorant Garamond', serif; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(15, 20, 25, 0.95), transparent);
+            z-index: 100;
+            transition: background 0.3s;
+        }
+
+        nav.scrolled { background: rgba(15, 20, 25, 0.98); }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 4rem 4rem;
+            position: relative;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
+                var(--bg-primary);
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.85rem 1.75rem;
+            border-radius: 2px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-muted);
+            border-color: var(--accent-muted);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .about-content { grid-template-columns: 1fr; }
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 2px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .contact-info h3 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .contact-info a, .contact-info p {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        /* Experience */
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(184, 181, 174, 0.1);
+        }
+
+        .experience-item:last-child { border-bottom: none; }
+
+        @media (max-width: 600px) {
+            .experience-item { grid-template-columns: 1fr; gap: 0.5rem; }
+        }
+
+        .exp-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .exp-content h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .exp-company {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .exp-duration {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Education */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 2px;
+            border-top: 2px solid var(--accent);
+        }
+
+        .education-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .degree {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .years {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Skills */
+        .skills-section {
+            background: var(--bg-secondary);
+            padding: 6rem 4rem;
+        }
+
+        .skills-section .section-title {
+            text-align: center;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            padding: 0.75rem 1.5rem;
+            background: rgba(201, 169, 98, 0.1);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 2px;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .cert-badge {
+            margin-top: 2rem;
+            padding: 1rem 1.5rem;
+            background: var(--bg-primary);
+            border-radius: 2px;
+            display: inline-block;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .cert-badge::before {
+            content: "◆";
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 4rem;
+            border-top: 1px solid rgba(184, 181, 174, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer .logo {
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            nav, .hero, section, footer {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a href="#home" class="nav-logo">GF</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#coursework">Coursework</a></li>
-        <li><a href="#involvement">Campus Involvement</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <nav id="nav">
+        <span class="logo serif">A.M.</span>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
-  </header>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="hero-content">
-        <p class="hero-greeting">Hello, I'm</p>
-        <h1 class="hero-name">Grace Friedman</h1>
-        <p class="hero-tagline">Accounting Student — Kelley School of Business</p>
-        <a href="#contact" class="btn btn-primary">Get in touch</a>
-      </div>
-      <div class="hero-visual">
-        <img src="grace-headshot.png" alt="Grace Friedman" class="hero-photo">
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <h2 class="section-title">About</h2>
-        <div class="about-grid">
-          <div class="about-text">
-            <p class="lead">I am a first-year student at Indiana University's Kelley School of Business studying Accounting, with a focused interest in tax strategy and financial advisory services. My passion for accounting stems from my love of analytical problem-solving and my belief that financial clarity empowers smarter decisions. As a leader, team collaborator, and lifelong learner, I strive to combine technical precision with professionalism and integrity in everything I pursue.</p>
-          </div>
-          <aside class="about-details">
-            <h3>Quick facts</h3>
-            <ul>
-              <li><strong>Location</strong> New York, USA</li>
-              <li><strong>Currently</strong> Full-time student</li>
-              <li><strong>Focus</strong> Tax Accounting</li>
-            </ul>
-          </aside>
+    <header class="hero">
+        <span class="hero-subtitle">Kelley School of Business, Indiana University</span>
+        <h1 class="serif">Akshita Mogulla</h1>
+        <p class="hero-tagline">Technology consultant & Information Systems student passionate about integrating new tools to streamline business operations.</p>
+        <div class="hero-buttons">
+            <a href="mailto:amogulla@iu.edu" class="btn btn-primary">Get in Touch</a>
+            <a href="https://www.linkedin.com/in/akshitamogulla" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
         </div>
-      </div>
-    </section>
+    </header>
 
-    <section id="experience" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-          <article class="timeline-item">
-            <span class="timeline-date">November 2024 – August 2025</span>
-            <div class="timeline-content">
-              <h3>Cashier & Barista</h3>
-              <p class="timeline-company">El Churro</p>
-              <p>I created engaging social media content (10+ promo videos with 1,500+ views each), provided excellent customer service while managing $3,000–$4,000 in sales per shift, and opened the café twice a week, reconciling cash and ensuring accurate daily reporting.</p>
+    <section id="about">
+        <span class="section-label">About</span>
+        <h2 class="section-title serif">Building bridges between technology and business</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I am a second year student at Indiana University's Kelley School of Business, currently majoring in Information Systems. I'm passionate about technology and aspire to a career in consulting, with a focus on integrating new tools to streamline business operations.</p>
+                <p>Based in the Greater Chicago area, I bring collaborative leadership and problem-solving skills to every project—from AI research to growth strategy and content creation.</p>
             </div>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-date">August 2025 – May 2029</span>
-            <div class="timeline-content">
-              <h3>Accounting Student</h3>
-              <p class="timeline-company">Kelley School of Business</p>
-              <p>Building expertise in financial reporting, data analysis, and business strategy through rigorous coursework, with a strong emphasis on analytical thinking, ethical decision making, and applying quantitative skills to real-world business problems.</p>
+            <div class="contact-info" id="contact">
+                <h3>Contact</h3>
+                <a href="mailto:amogulla@iu.edu">amogulla@iu.edu</a>
+                <a href="mailto:akshitamogulla29@gmail.com">akshitamogulla29@gmail.com</a>
+                <a href="https://www.linkedin.com/in/akshitamogulla" target="_blank" rel="noopener">LinkedIn</a>
             </div>
-          </article>
         </div>
-      </div>
     </section>
 
-    <section id="coursework" class="section">
-      <div class="container">
-        <h2 class="section-title">Relevant Coursework</h2>
-        <div class="coursework-grid">
-          <div class="coursework-item">
-            <h3>Introduction to Principles of Accounting</h3>
-            <p class="coursework-code">BUS-A 100</p>
-            <p class="coursework-desc">Learned financial statement preparation, transaction analysis, and the fundamentals of accounting for business decision-making.</p>
-          </div>
-          <div class="coursework-item">
-            <h3>[Course name]</h3>
-            <p>[Course code — e.g. A 202]</p>
-          </div>
-          <div class="coursework-item">
-            <h3>[Course name]</h3>
-            <p>[Course code — e.g. A 311]</p>
-          </div>
-          <div class="coursework-item">
-            <h3>[Course name]</h3>
-            <p>[Course code]</p>
-          </div>
+    <section id="experience">
+        <span class="section-label">Experience</span>
+        <h2 class="section-title serif">Professional Experience</h2>
+        <div class="experience-list">
+            <div class="experience-item">
+                <span class="exp-date">Jan 2026 – Present</span>
+                <div class="exp-content">
+                    <h3>Member, Technology Consulting Awareness & Readiness Program</h3>
+                    <div class="exp-company">Aperture Partners</div>
+                    <span class="exp-duration">3 months</span>
+                </div>
+            </div>
+            <div class="experience-item">
+                <span class="exp-date">Sep 2025 – Present</span>
+                <div class="exp-content">
+                    <h3>Technology Consultant</h3>
+                    <div class="exp-company">Aperture Partners</div>
+                    <span class="exp-duration">7 months</span>
+                </div>
+            </div>
+            <div class="experience-item">
+                <span class="exp-date">Aug 2025 – Present</span>
+                <div class="exp-content">
+                    <h3>Undergraduate Researcher</h3>
+                    <div class="exp-company">IU Center of Excellence for Women & Technology</div>
+                    <span class="exp-duration">8 months</span>
+                </div>
+            </div>
+            <div class="experience-item">
+                <span class="exp-date">May 2025 – Present</span>
+                <div class="exp-content">
+                    <h3>Associate Director of Content Creation</h3>
+                    <div class="exp-company">Women in Business Technology, Indiana University</div>
+                    <span class="exp-duration">11 months</span>
+                </div>
+            </div>
+            <div class="experience-item">
+                <span class="exp-date">Mar 2025 – Present</span>
+                <div class="exp-content">
+                    <h3>Growth Strategy Intern</h3>
+                    <div class="exp-company">Impact AI Inc</div>
+                    <span class="exp-duration">1 year 1 month</span>
+                </div>
+            </div>
+            <div class="experience-item">
+                <span class="exp-date">Sep 2024 – May 2025</span>
+                <div class="exp-content">
+                    <h3>Outreach Committee</h3>
+                    <div class="exp-company">Women in Business Technology, Indiana University</div>
+                    <span class="exp-duration">9 months</span>
+                </div>
+            </div>
+            <div class="experience-item">
+                <span class="exp-date">Jun 2025 – Aug 2025</span>
+                <div class="exp-content">
+                    <h3>Product Development Extern</h3>
+                    <div class="exp-company">News Corp</div>
+                    <span class="exp-duration">3 months</span>
+                </div>
+            </div>
+            <div class="experience-item">
+                <span class="exp-date">Jun 2023 – Jul 2023</span>
+                <div class="exp-content">
+                    <h3>AI Scholar</h3>
+                    <div class="exp-company">Inspirit AI</div>
+                    <span class="exp-duration">2 months</span>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="involvement" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Campus involvement</h2>
-        <div class="involvement-list">
-          <article class="involvement-item">
-            <h3>[Organization or club name]</h3>
-            <p class="involvement-role">[Your role — e.g. Member, Treasurer, Committee Chair]</p>
-            <p>[Brief description of your involvement and impact.]</p>
-          </article>
-          <article class="involvement-item">
-            <h3>[Organization or club name]</h3>
-            <p class="involvement-role">[Your role]</p>
-            <p>[Brief description.]</p>
-          </article>
+    <section id="education">
+        <span class="section-label">Education</span>
+        <h2 class="section-title serif">Education</h2>
+        <div class="education-grid">
+            <div class="education-card">
+                <h3>Indiana University</h3>
+                <div class="degree">Kelley School of Business</div>
+                <p>Bachelor's Degree, Management Information Systems</p>
+                <span class="years">August 2024 – May 2028</span>
+            </div>
+            <div class="education-card">
+                <h3>Metea Valley</h3>
+                <p>High School</p>
+                <span class="years">August 2020 – May 2024</span>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="projects" class="section">
-      <div class="container">
-        <h2 class="section-title">Selected work</h2>
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-image placeholder-image">
-              <span>Project image</span>
-            </div>
-            <div class="project-info">
-              <h3>[Project name]</h3>
-              <p>[One-line description of the project and your role.]</p>
-              <a href="#" class="link-arrow">View project →</a>
-            </div>
-          </article>
-          <article class="project-card">
-            <div class="project-image placeholder-image">
-              <span>Project image</span>
-            </div>
-            <div class="project-info">
-              <h3>[Project name]</h3>
-              <p>[One-line description.]</p>
-              <a href="#" class="link-arrow">View project →</a>
-            </div>
-          </article>
-          <article class="project-card">
-            <div class="project-image placeholder-image">
-              <span>Project image</span>
-            </div>
-            <div class="project-info">
-              <h3>[Project name]</h3>
-              <p>[One-line description.]</p>
-              <a href="#" class="link-arrow">View project →</a>
-            </div>
-          </article>
+    <section class="skills-section" id="skills">
+        <span class="section-label">Skills & Certifications</span>
+        <h2 class="section-title serif">Expertise</h2>
+        <div class="skills-grid">
+            <span class="skill-tag">Collaborative Leadership</span>
+            <span class="skill-tag">Problem Solving</span>
+            <span class="skill-tag">Machine Learning</span>
+            <span class="skill-tag">Technology Consulting</span>
+            <span class="skill-tag">Business Systems</span>
+            <span class="skill-tag">Content Creation</span>
+            <span class="skill-tag">Growth Strategy</span>
         </div>
-      </div>
+        <div class="cert-badge">Microsoft Office Specialist Certification</div>
     </section>
 
-    <section id="contact" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <div class="contact-content">
-          <p class="lead">[Short line inviting people to reach out — e.g. "I'm always open to new conversations and collaborations."]</p>
-          <ul class="contact-links">
-            <li><a href="mailto:your.email@example.com">your.email@example.com</a></li>
-            <li><a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href="https://twitter.com/yourhandle" target="_blank" rel="noopener">Twitter / X</a></li>
-            <li><a href="#" target="_blank" rel="noopener">[Resume / CV]</a></li>
-          </ul>
+    <footer>
+        <span class="logo serif">Akshita Mogulla</span>
+        <div class="footer-links">
+            <a href="mailto:amogulla@iu.edu">Email</a>
+            <a href="https://www.linkedin.com/in/akshitamogulla" target="_blank" rel="noopener">LinkedIn</a>
         </div>
-      </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> Grace Friedman. [Optional: "Built with care" or similar.]</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
 </body>
 </html>
