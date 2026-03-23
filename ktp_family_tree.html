@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KTP Family Tree</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A5E;
+  --navy-mid: #223370;
+  --navy-light: #2A3D82;
+  --white: #FFFFFF;
+  --off-white: #F3F5FA;
+  --muted: #8595BB;
+  --border: rgba(27,42,94,0.13);
+  --line: rgba(27,42,94,0.16);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--off-white);
+  font-family: 'Outfit', sans-serif;
+  color: var(--navy);
+  min-height: 100vh;
+}
+
+/* HEADER */
+header {
+  background: var(--navy);
+  text-align: center;
+  padding: 52px 20px 44px;
+  position: relative;
+}
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+.greek {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 10vw, 7rem);
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+.org-sub {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  margin-top: 10px;
+}
+.hline { width: 56px; height: 1px; background: rgba(255,255,255,0.22); margin: 18px auto; }
+.h-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+}
+
+/* CONTROLS */
+.controls {
+  display: flex;
+  justify-content: center;
+  padding: 28px 20px 8px;
+}
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+}
+.search-box input {
+  width: 100%;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 40px;
+  padding: 10px 18px 10px 40px;
+  color: var(--navy);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.86rem;
+  outline: none;
+  box-shadow: 0 2px 10px rgba(27,42,94,0.06);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-box input::placeholder { color: var(--muted); }
+.search-box input:focus { border-color: var(--navy-light); box-shadow: 0 4px 18px rgba(27,42,94,0.11); }
+.search-box svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); opacity: 0.3; }
+
+/* STATS */
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  padding: 14px 20px 28px;
+  flex-wrap: wrap;
+}
+.stat { display: flex; flex-direction: column; align-items: center; }
+.stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+}
+.stat-l {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* TREE CANVAS */
+.tree-canvas {
+  padding: 0 16px 70px;
+  overflow-x: auto;
+}
+
+.tree-wrap {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0;
+  min-width: max-content;
+  margin: 0 auto;
+  padding: 0 10px;
+  position: relative;
+}
+
+/* Single branch column */
+.branch-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 14px;
+  position: relative;
+  animation: riseUp 0.5s both;
+}
+.branch-col.hidden { display: none; }
+@keyframes riseUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Top stem */
+.top-stem {
+  width: 2px;
+  height: 32px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+/* ACTIVE (BIG) NODE */
+.active-node {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 14px;
+  padding: 13px 16px 12px;
+  text-align: center;
+  width: 158px;
+  box-shadow: 0 6px 22px rgba(27,42,94,0.2);
+  flex-shrink: 0;
+  position: relative;
+}
+.active-node .av {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem; font-weight: 700;
+  margin: 0 auto 8px;
+}
+.active-node .av.has-photo {
+  padding: 0;
+  overflow: hidden;
+  background: rgba(255,255,255,0.12);
+}
+.active-node .av.has-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+a.active-node.active-node--linked {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+}
+a.active-node.active-node--linked .nm { color: var(--white); }
+a.active-node.active-node--linked .rl { color: rgba(255,255,255,0.38); }
+.active-node .nm {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; font-weight: 700;
+  line-height: 1.25;
+}
+.active-node .rl {
+  font-size: 0.58rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  margin-top: 4px;
+}
+
+/* Stem */
+.mid-stem {
+  width: 2px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+/* Horizontal bar across littles */
+.h-bar-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+.h-bar-line {
+  position: absolute;
+  top: 0;
+  height: 2px;
+  background: var(--line);
+  pointer-events: none;
+}
+
+/* Row of littles */
+.littles-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* Each little sub-branch */
+.little-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 8px;
+}
+
+/* LITTLE NODE */
+.little-node {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 11px;
+  padding: 9px 12px 10px;
+  text-align: center;
+  width: 136px;
+  box-shadow: 0 2px 12px rgba(27,42,94,0.07);
+  flex-shrink: 0;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+}
+.little-node:hover {
+  box-shadow: 0 5px 20px rgba(27,42,94,0.13);
+  border-color: rgba(27,42,94,0.3);
+  transform: translateY(-2px);
+}
+.little-node .av {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem; font-weight: 700;
+  margin: 0 auto 6px;
+  color: var(--navy);
+}
+.little-node .nm {
+  font-size: 0.79rem; font-weight: 500;
+  line-height: 1.25; color: var(--navy);
+}
+.little-node .rl {
+  font-size: 0.56rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); margin-top: 3px;
+}
+.little-node .av.has-photo {
+  padding: 0;
+  overflow: hidden;
+  background: var(--off-white);
+}
+.little-node .av.has-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+a.little-node.little-node--linked {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+}
+a.little-node.little-node--linked .nm { color: var(--navy); }
+a.little-node.little-node--linked .rl { color: var(--muted); }
+
+/* Grand-littles */
+.grandlittles-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gl-h-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+.gl-h-line {
+  position: absolute;
+  top: 0; height: 2px;
+  background: var(--line);
+  opacity: 0.7;
+  pointer-events: none;
+}
+.gl-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+.gl-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 6px;
+}
+
+/* GL NODE */
+.gl-node {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 7px 10px 8px;
+  text-align: center;
+  width: 116px;
+  box-shadow: 0 1px 6px rgba(27,42,94,0.04);
+  flex-shrink: 0;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.gl-node:hover {
+  box-shadow: 0 3px 12px rgba(27,42,94,0.09);
+  transform: translateY(-1px);
+}
+.gl-node .av {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(27,42,94,0.07);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.62rem; font-weight: 700;
+  margin: 0 auto 4px;
+  color: var(--navy-mid);
+}
+.gl-node .av.has-photo {
+  padding: 0;
+  overflow: hidden;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+}
+.gl-node .av.has-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+a.gl-node.gl-node--linked {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+a.gl-node.gl-node--linked .nm { color: var(--navy-mid); }
+a.gl-node.gl-node--linked .rl { color: var(--muted); }
+.gl-node .nm {
+  font-size: 0.7rem; font-weight: 400;
+  line-height: 1.2; color: var(--navy-mid);
+}
+.gl-node .rl {
+  font-size: 0.53rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); margin-top: 2px; opacity: 0.75;
+}
+
+footer {
+  text-align: center;
+  padding: 18px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  border-top: 1px solid var(--border);
+}
+
+.local-notice {
+  max-width: 720px;
+  margin: 0 auto 0;
+  padding: 12px 20px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--navy);
+  background: rgba(42, 61, 130, 0.08);
+  border-bottom: 1px solid var(--border);
+}
+.local-notice code {
+  font-size: 0.72em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: rgba(27, 42, 94, 0.08);
+  word-break: break-all;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="greek">ΚΘΠ</div>
+  <div class="org-sub">Kappa Theta Pi · Professional Technology Fraternity</div>
+  <div class="hline"></div>
+  <div class="h-title">Alpha Eta Chapter · Family Tree</div>
+</header>
+
+<div class="local-notice" id="localNotice" hidden>
+  <strong>Styling member sites:</strong> Browsers often block CSS when pages are opened as <code>file://</code> links.
+  From your <strong>Downloads</strong> folder run <code>python3 -m http.server 8765</code>, then open
+  <code>http://localhost:8765/ktp_family_tree.html</code> so each site’s stylesheet loads normally.
+</div>
+
+<div class="controls">
+  <div class="search-box">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B2A5E" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="searchInput" placeholder="Search any member…" oninput="filterBranches()">
+  </div>
+</div>
+
+<div class="stats-row" id="statsRow"></div>
+
+<div class="tree-canvas">
+  <div class="tree-wrap" id="treeWrap"></div>
+</div>
+
+<footer>ΚΘΠ · Alpha Eta Chapter · Indiana University</footer>
+
+<script>
+const families = [
+  { big: "Aman Khatri", littles: [
+    { name: "Arnav Pydimukkala", gls: ["Diya Patel"] },
+    { name: "Tristan Kean", gls: ["Jaeyoon Ahn"] }
+  ]},
+  { big: "Atmikha Jeeju", littles: [
+    { name: "Niva Vandaria", gls: ["Medha Punugoti"] },
+    { name: "Carolyn Thomas", gls: ["Prajna Tatooskar"] }
+  ]},
+  { big: "Saisree Kathi", littles: [
+    { name: "Benedict Yiga", gls: ["Levin Marcinko"] },
+    { name: "Utsavi Gilder", gls: ["Nirmaan Bhatt"] }
+  ]},
+  { big: "Trisha Konkimalla", littles: [
+    { name: "Dhanali Kantilal", gls: ["Meara Block"] },
+    { name: "Aaditya Rajvanshi", gls: ["Landon Hill", "Aniketh Battepati"] }
+  ]},
+  { big: "Shreyas Sunke", littles: [
+    { name: "Vini Premkumar", gls: ["Annanya Bitra"] },
+    { name: "Alex Balon", gls: ["Gunn Park"] }
+  ]},
+  { big: "Jake Cole", littles: [
+    { name: "Carl Fampo", gls: ["Evan Maruyama"] },
+    { name: "Yilin Li", gls: ["Akshita Mogulla"] }
+  ]},
+  { big: "Babara David", littles: [
+    { name: "Dhruv Kapur", gls: [] },
+    { name: "Srika Sudheer", gls: ["Nekeisha Matta"] }
+  ]},
+  { big: "Pranav Vangari", littles: [
+    { name: "Amrutha Balla", gls: ["Nirvaan Sanghi", "Rishit Shekhar"] },
+    { name: "Adam Thason", gls: ["Aarav Chutani"] }
+  ]},
+  { big: "Shivani Kamineni", littles: [
+    { name: "Rhea Shah", gls: ["Jaimin Shah"] },
+    { name: "Pratham Taparia", gls: ["Anoushka Manica"] }
+  ]},
+  { big: "Aadvait Hirde", littles: [
+    { name: "Akshay Boddapu", gls: [] },
+    { name: "George Mitchell Herzog", gls: ["Nick Natale"] }
+  ]},
+  { big: "Jason Ballinger", littles: [
+    { name: "Travis Garcia", gls: [] },
+    { name: "Ethan Abilius", gls: ["Adishree Botwe"] }
+  ]},
+  { big: "Nithya Mooli", littles: [
+    { name: "Sivaan Sharma", gls: [] }
+  ]},
+  { big: "Alex Johnson", littles: [
+    { name: "Kenneth Connor Kahle", gls: [] }
+  ]},
+  { big: "Lawrence Hermanto", littles: [
+    { name: "Jorge Sebastian Diaz", gls: [] }
+  ]},
+  { big: "Karthikeya", littles: [
+    { name: "Rishi Bhuthpur", gls: ["Natalia Yorgova", "Kade Rickard"] },
+    { name: "Sri Ram Sai Vallabhaneni", gls: [] }
+  ]},
+  { big: "Sankalpa Hegde", littles: [
+    { name: "Tanya Kalale", gls: ["Elizabeth Vander Bie"] },
+    { name: "Veer Nangia", gls: [] }
+  ]},
+];
+
+function inits(name) {
+  return name.trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+}
+/** Encode each path segment for file URLs (spaces & special chars). */
+function siteUrl(relPath) {
+  return relPath.split('/').map(encodeURIComponent).join('/');
+}
+function escAttr(s) {
+  return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+
+const SITE = 'gammaclassproject-main/';
+const SITE2 = 'gammaclassproject-sites/';
+const memberSites = {
+  "Aman Khatri": { href: SITE + "_unzipped/aman_khatri_website__7_/aman_khatri.html", img: SITE + "_tree_avatars/aman_khatri.jpg" },
+  "Tristan Kean": { href: SITE + "tristan-kean.html", img: SITE + "_tree_avatars/tristan_kean.jpg" },
+  "Atmikha Jeeju": { href: SITE + "Atmikha Jeeju - personal website.html", img: SITE + "_tree_avatars/atmikha_jeeju.jpg" },
+  "Medha Punugoti": { href: SITE + "Medha Punugoti- personal website.html", img: SITE + "_tree_avatars/medha_punugoti.png" },
+  "Saisree Kathi": { href: SITE + "saisree-website-v2.html", img: SITE + "_tree_avatars/saisree_kathi.jpg" },
+  "Benedict Yiga": { href: SITE + "Benedict-Personal-Website (1).html", img: SITE + "_tree_avatars/benedict_yiga.png" },
+  "Dhanali Kantilal": { href: SITE + "_unzipped/Dhanali_personal-website/Dhanali personal-website/index.html", img: SITE + "_unzipped/Dhanali_personal-website/Dhanali personal-website/assets/dhanali-kantilal.png" },
+  "Meara Block": { href: SITE + "_unzipped/meara-block-website/meara-block-website/index.html", img: SITE + "_unzipped/meara-block-website/meara-block-website/assets/1766114138564-e89c1c0d-84ff-4319-a2ff-2ef88fad74bd.png" },
+  "Landon Hill": { href: SITE + "landon-hill.html", img: SITE + "_tree_avatars/landon_hill.jpg" },
+  "Aniketh Battepati": { href: "aniketh_battepati_site/aniketh_battepati.html", img: "aniketh_battepati_site/headshot.jpg" },
+  "Shreyas Sunke": { href: SITE + "Actives Websites/Shreyas Sunke/index.html", img: SITE + "Actives Websites/Shreyas Sunke/shreyas.jpeg" },
+  "Annanya Bitra": { href: SITE + "Annanya Bitra- personal website.html", img: SITE + "_tree_avatars/annanya_bitra.png" },
+  "Jake Cole": { href: SITE + "Actives Websites/Jake Cole/index.html", img: SITE + "Actives Websites/Jake Cole/1736187558238.jpeg" },
+  "Yilin Li": { href: SITE + "_unzipped/yilin-site/yilin-site/index.html", img: SITE + "_unzipped/yilin-site/yilin-site/assets/yilin-li-headshot.png" },
+  "Babara David": { href: SITE + "Actives Websites/barbara-david/index.html" },
+  "Nekeisha Matta": { href: SITE + "nekeisha-matta.html", img: SITE + "_tree_avatars/nekeisha_matta.png" },
+  "Pranav Vangari": { href: SITE + "Pranav-Personal-Website (1).html", img: SITE + "_tree_avatars/pranav_vangari.png" },
+  "Amrutha Balla": { href: SITE + "_unzipped/amrutha_balla_site/amrutha balla site/index.html", img: SITE + "_unzipped/amrutha_balla_site/amrutha balla site/amrutha-headshot.png" },
+  "Rishit Shekhar": { href: SITE + "_unzipped/Rishit/Rishit/index.html", img: SITE + "_unzipped/Rishit/Rishit/assets/rishit-shekhar-headshot.png" },
+  "Adam Thason": { href: SITE + "Adam Thason- personal website.html" },
+  "Rhea Shah": { href: SITE + "_unzipped/rhea_shah_website/rhea_shah.html", img: SITE + "_tree_avatars/rhea_shah.jpg" },
+  "Jaimin Shah": { href: SITE + "Jaimin-Shah/index.html", img: SITE + "Jaimin-Shah/assets/jaimin-shah-profile.png" },
+  "Pratham Taparia": { href: SITE + "Pratham-Taparia-Portfolio.html" },
+  "Anoushka Manica": { href: SITE + "Anoushka Manica - personal website.html", img: SITE + "_tree_avatars/anoushka_manica.jpg" },
+  "Nick Natale": { href: SITE + "_unzipped/Nick_personal-website/Nick personal-website/index.html", img: SITE + "_unzipped/Nick_personal-website/Nick personal-website/assets/nick-headshot.png" },
+  "Jason Ballinger": { href: SITE + "_unzipped/Jason/Jason/index.html", img: SITE + "_unzipped/Jason/Jason/assets/1766114138564-e89c1c0d-84ff-4319-a2ff-2ef88fad74bd.png" },
+  "Travis Garcia": { href: SITE + "_unzipped/TravisGarcia/TravisGarcia/index.html", img: SITE + "_unzipped/TravisGarcia/TravisGarcia/assets/travis-garcia-headshot.png" },
+  "Adishree Botwe": { href: SITE + "adishree-botwee-website/index.html", img: SITE + "adishree-botwee-website/assets/headshot.png" },
+  "Alex Johnson": { href: SITE + "Alex Johnson- personal website.html", img: SITE + "_tree_avatars/alex_johnson.png" },
+  "Jorge Sebastian Diaz": { href: SITE + "Actives Websites/Jorge Sebastian Diaz/jorge-diaz.html" },
+  "Karthikeya": { href: SITE + "Karthikeya Bangaru- personal website.html", img: SITE + "_tree_avatars/karthikeya.png" },
+  "Kade Rickard": { href: SITE + "_unzipped/kade_rickard_portfolio/kade_rickard_portfolio.html", img: SITE + "_tree_avatars/kade_rickard.jpg" },
+  "Veer Nangia": { href: SITE + "veer-nangia.html", img: SITE + "_tree_avatars/veer_nangia.png" },
+  "Levin Marcinko": { href: SITE + "Actives Websites/Levin Marcinko/lmarcinko.html", img: SITE + "Actives Websites/Levin Marcinko/Levin.jpeg" },
+  "Diya Patel": { href: SITE + "sahiti-midithuri-website/index.html" },
+
+  "Nithya Mooli": { href: SITE2 + "Nithya Mooli Site/index.html", img: SITE2 + "Nithya Mooli Site/headshot.jpg" },
+  "Arnav Pydimukkala": { href: SITE2 + "Arnav-Pydimukkala/index.html", img: SITE2 + "Arnav-Pydimukkala/assets/profile.png" },
+  "Jaeyoon Ahn": { href: SITE2 + "jaeyoon-ahn-website.html", img: SITE2 + "_tree_avatars/jaeyoon_ahn.png" },
+  "Niva Vandaria": { href: SITE2 + "shriya-nivavadalia.html" },
+  "Carolyn Thomas": { href: SITE2 + "Carolyn-Thomas/index.html", img: SITE2 + "Carolyn-Thomas/images/carolyn-thomas-profile.png" },
+  "Prajna Tatooskar": { href: SITE2 + "prajna.html" },
+  "Utsavi Gilder": { href: SITE2 + "utsavi-website/index.html", img: SITE2 + "utsavi-website/utsavi-profile.png" },
+  "Nirmaan Bhatt": { href: SITE2 + "nirmaan-bhatt.html", img: SITE2 + "_tree_avatars/nirmaan_bhatt.jpg" },
+  "Trisha Konkimalla": { href: SITE2 + "Trisha Konkimalla Site/index.html", img: SITE2 + "Trisha Konkimalla Site/headshot.jpg" },
+  "Aaditya Rajvanshi": { href: SITE2 + "Aaditya-Rajvanshi-personal-site/index.html" },
+  "Vini Premkumar": { href: SITE2 + "shriya-vinipremkumar.html" },
+  "Alex Balon": { href: SITE2 + "Alexander-Balon/index.html", img: SITE2 + "Alexander-Balon/profile.png" },
+  "Gunn Park": { href: SITE2 + "gunn-park-website.html", img: SITE2 + "_tree_avatars/gunn_park.png" },
+  "Carl Fampo": { href: SITE2 + "Carl's Website/carl-fampo.html", img: SITE2 + "Carl's Website/profile-photo.png" },
+  "Evan Maruyama": { href: SITE2 + "evan-maruyama.html", img: SITE2 + "_tree_avatars/evan_maruyama.png" },
+  "Akshita Mogulla": { href: SITE2 + "akshita-mogulla-site/index.html" },
+  "Dhruv Kapur": { href: SITE2 + "dhruv-kapur-site/index.html", img: SITE2 + "dhruv-kapur-site/profile.png" },
+  "Nirvaan Sanghi": { href: SITE2 + "nirvaan-site/index.html" },
+  "Aarav Chutani": { href: SITE2 + "aarav-chuttani/index.html", img: SITE2 + "aarav-chuttani/assets/aarav-chuttani-headshot.png" },
+  "Shivani Kamineni": { href: SITE2 + "shriya-shivanikamineni.html" },
+  "Aadvait Hirde": { href: SITE2 + "Aadvait-hirde.html", img: SITE2 + "_tree_avatars/aadvait_hirde.jpg" },
+  "Akshay Boddapu": { href: SITE2 + "Akshay-Boddapu/index.html", img: SITE2 + "Akshay-Boddapu/assets/profile.png" },
+  "George Mitchell Herzog": { href: SITE2 + "gammaclassproject-sites/George Mitchell Herzog \u2014 Cybersecurity Professional.html" },
+  "Ethan Abilius": { href: SITE2 + "ethan-website/index.html", img: SITE2 + "ethan-website/assets/ethan.png" },
+  "Sivaan Sharma": { href: SITE2 + "sivaan-website/index.html", img: SITE2 + "sivaan-website/images/sivaan-hero.png" },
+  "Kenneth Connor Kahle": { href: SITE2 + "Kenneth_Connor_Kahle.html" },
+  "Lawrence Hermanto": { href: SITE2 + "lawrence-hermanto.html", img: SITE2 + "_tree_avatars/lawrence_hermanto.png" },
+  "Rishi Bhuthpur": { href: SITE2 + "rishi-website/index.html", img: SITE2 + "rishi-website/headshot.png" },
+  "Natalia Yorgova": { href: SITE2 + "natalia-yorgova-website/index.html", img: SITE2 + "natalia-yorgova-website/NataliaHeadshot.jpg" },
+  "Sri Ram Sai Vallabhaneni": { href: SITE2 + "shriya-sriramsaivallabhaneni.html" },
+  "Sankalpa Hegde": { href: SITE2 + "shriya-sankalpahegde.html" },
+  "Tanya Kalale": { href: SITE2 + "tanyakalale.html" },
+  "Elizabeth Vander Bie": { href: SITE2 + "Elizabeth-Website/index.html", img: SITE2 + "Elizabeth-Website/ElizabethHeadshot.jpg" },
+};
+
+function mk(tag, cls, inner) {
+  const el = document.createElement(tag);
+  if (cls) el.className = cls;
+  if (inner) el.innerHTML = inner;
+  return el;
+}
+function stem(h) {
+  const d = mk('div','mid-stem');
+  d.style.height = h+'px';
+  return d;
+}
+
+function avatarBlock(name, profile) {
+  const thumb = profile && profile.img
+    ? profile.img
+    : (profile && profile.href ? 'ktp_tree_avatars/_silhouette.svg' : null);
+  if (thumb) {
+    return `<div class="av has-photo"><img src="${siteUrl(thumb)}" alt="${escAttr(name)}"></div>`;
+  }
+  return `<div class="av">${inits(name)}</div>`;
+}
+
+function appendProfiledNode(container, nodeClass, linkClass, name, roleLabel, profile) {
+  const body = `${avatarBlock(name, profile)}<div class="nm">${name}</div><div class="rl">${roleLabel}</div>`;
+  if (profile && profile.href) {
+    const a = document.createElement('a');
+    a.className = nodeClass + ' ' + linkClass;
+    a.href = siteUrl(profile.href);
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.innerHTML = body;
+    container.appendChild(a);
+  } else {
+    container.appendChild(mk('div', nodeClass, body));
+  }
+}
+
+function buildGLSub(name) {
+  const sub = mk('div','gl-sub');
+  sub.appendChild(stem(14));
+  appendProfiledNode(sub, 'gl-node', 'gl-node--linked', name, 'Beta Class', memberSites[name]);
+  return sub;
+}
+
+function buildLittleSub(little) {
+  const sub = mk('div','little-sub');
+  sub.appendChild(stem(20));
+  appendProfiledNode(sub, 'little-node', 'little-node--linked', little.name, 'Alpha Class', memberSites[little.name]);
+
+  if (little.gls && little.gls.length > 0) {
+    sub.appendChild(stem(18));
+    const glWrap = mk('div','gl-h-wrap');
+    const glRow = mk('div','gl-row');
+    little.gls.forEach(gl => glRow.appendChild(buildGLSub(gl)));
+    glWrap.appendChild(glRow);
+    sub.appendChild(glWrap);
+
+    requestAnimationFrame(() => {
+      if (little.gls.length > 1) {
+        const subs = glRow.querySelectorAll('.gl-sub');
+        if (subs.length > 1) {
+          const first = subs[0].getBoundingClientRect();
+          const last = subs[subs.length-1].getBoundingClientRect();
+          const rowRect = glRow.getBoundingClientRect();
+          const line = mk('div','gl-h-line');
+          const leftPct = ((first.left + first.width/2 - rowRect.left) / rowRect.width) * 100;
+          const rightPct = ((last.left + last.width/2 - rowRect.left) / rowRect.width) * 100;
+          line.style.left = leftPct+'%';
+          line.style.width = (rightPct - leftPct)+'%';
+          glWrap.style.position = 'relative';
+          glWrap.appendChild(line);
+        }
+      }
+    });
+  }
+  return sub;
+}
+
+function buildBranchCol(fam, idx) {
+  const col = mk('div','branch-col');
+  col.style.animationDelay = (idx*0.03)+'s';
+
+  const allNames = [fam.big, ...fam.littles.map(l=>l.name), ...fam.littles.flatMap(l=>l.gls)];
+  col.dataset.names = allNames.join(' ').toLowerCase();
+
+  col.appendChild(mk('div','top-stem'));
+  appendProfiledNode(col, 'active-node', 'active-node--linked', fam.big, 'Founder Class', memberSites[fam.big]);
+
+  if (fam.littles.length === 0) return col;
+
+  col.appendChild(stem(20));
+
+  const hWrap = mk('div','h-bar-wrap');
+  const littlesRow = mk('div','littles-row');
+
+  fam.littles.forEach(l => littlesRow.appendChild(buildLittleSub(l)));
+  hWrap.appendChild(littlesRow);
+  col.appendChild(hWrap);
+
+  requestAnimationFrame(() => {
+    const subs = littlesRow.querySelectorAll(':scope > .little-sub');
+    if (subs.length > 1) {
+      const first = subs[0].getBoundingClientRect();
+      const last = subs[subs.length-1].getBoundingClientRect();
+      const rowRect = littlesRow.getBoundingClientRect();
+      const l1 = (first.left + first.width/2 - rowRect.left) / rowRect.width * 100;
+      const l2 = (last.left + last.width/2 - rowRect.left) / rowRect.width * 100;
+      const line = mk('div','h-bar-line');
+      line.style.left = l1+'%';
+      line.style.width = (l2-l1)+'%';
+      hWrap.style.position = 'relative';
+      hWrap.appendChild(line);
+    }
+  });
+
+  return col;
+}
+
+// Render
+const wrap = document.getElementById('treeWrap');
+families.forEach((fam, i) => wrap.appendChild(buildBranchCol(fam, i)));
+
+if (location.protocol === 'file:') {
+  const ln = document.getElementById('localNotice');
+  if (ln) ln.hidden = false;
+}
+
+// Stats
+const totalBigs = families.length;
+const totalLittles = families.reduce((s,f)=>s+f.littles.length,0);
+const totalGLs = families.reduce((s,f)=>s+f.littles.reduce((ss,l)=>ss+l.gls.length,0),0);
+document.getElementById('statsRow').innerHTML = `
+  <div class="stat"><div class="stat-n">${totalBigs+totalLittles+totalGLs}</div><div class="stat-l">Actives</div></div>
+  <div class="stat"><div class="stat-n">${totalBigs}</div><div class="stat-l">Bigs</div></div>
+  <div class="stat"><div class="stat-n">${totalLittles}</div><div class="stat-l">Littles</div></div>
+  <div class="stat"><div class="stat-n">${totalGLs}</div><div class="stat-l">Grand-Littles</div></div>
+`;
+
+function filterBranches() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.branch-col').forEach(col => {
+    col.classList.toggle('hidden', q.length > 0 && !col.dataset.names.includes(q));
+  });
+}
+</script>
+</body>
+</html>
