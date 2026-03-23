@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jaimin Shah | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --accent: #0b63ce;
+      --accent-dark: #08488f;
+      --text-main: #222222;
+      --text-muted: #666666;
+      --bg: #ffffff;
+      --bg-soft: #f5f8fc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #f0f6ff 0, #ffffff 55%, #edf3ff 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav {
+      max-width: none;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .nav-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.1rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      max-width: none;
+      margin: 0;
+      padding: 2.5rem 2rem 3rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 2.5rem;
+      align-items: center;
+      padding: 2.25rem 2rem 2.4rem;
+      margin-bottom: 3.2rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #0b63ce 0%, #0f7ee4 35%, #ffffff 80%);
+      color: #ffffff;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.3rem, 3.2vw, 2.9rem);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-text h2 {
+      font-size: 1.05rem;
+      color: rgba(232, 241, 255, 0.95);
+      margin-bottom: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .hero-summary {
+      color: rgba(238, 245, 255, 0.92);
+      max-width: 52rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+      color: rgba(231, 239, 255, 0.96);
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-meta span {
+      position: relative;
+      padding-left: 0.8rem;
+    }
+
+    .hero-meta span::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(231, 239, 255, 0.9);
+      transform: translateY(-50%);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.18s ease-out, color 0.18s ease-out, border-color 0.18s ease-out, transform 0.1s ease-out;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: var(--accent-dark);
+      border-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .btn-primary:hover {
+      background: #f2f6ff;
+      border-color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: #ffffff;
+      color: var(--accent);
+      border-color: rgba(11, 99, 206, 0.18);
+    }
+
+    .btn-ghost:hover {
+      background: #f2f6ff;
+      border-color: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-photo-inner {
+      position: relative;
+      width: 210px;
+      height: 210px;
+    }
+
+    .hero-photo-circle {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 4px solid #ffffff;
+      padding: 6px;
+      background: #ffffff;
+      box-shadow: 0 16px 30px rgba(5, 37, 82, 0.28);
+      overflow: hidden;
+    }
+
+    .hero-photo-circle img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.12);
+    }
+
+    section {
+      padding-top: 2.2rem;
+    }
+
+    section:not(.hero) {
+      margin-top: 0;
+      padding: 2.2rem 1.8rem 2.4rem;
+      border-radius: 0;
+      background: #ffffff;
+      box-shadow: none;
+      border: none;
+    }
+
+    section:nth-of-type(2n+1):not(.hero) {
+      background: #08488f;
+      color: #ffffff;
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .section-intro {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    section:nth-of-type(2n+1):not(.hero) h3::before {
+      background: #ffffff;
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .experience-item {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: none;
+      border-radius: 8px;
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .experience-title,
+    section:nth-of-type(2n+1):not(.hero) .experience-company {
+      color: #ffffff;
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .experience-meta {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .experience-bullets {
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .skill-tag {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .pill {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .contact-card {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .contact-meta {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    section:nth-of-type(2n+1):not(.hero) .contact-meta span strong {
+      color: #ffffff;
+    }
+
+    section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    section h3::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      border-radius: 3px;
+      background: var(--accent);
+    }
+
+    .section-intro {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 48rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .experience-item {
+      padding: 1.1rem 1.2rem;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid #e1e8f5;
+      box-shadow: 0 6px 18px rgba(15, 68, 136, 0.06);
+    }
+
+    .experience-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.4rem 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .experience-title {
+      font-weight: 600;
+    }
+
+    .experience-company {
+      color: var(--accent-dark);
+      font-weight: 500;
+    }
+
+    .experience-meta {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.4rem;
+    }
+
+    .experience-bullets {
+      margin-top: 0.35rem;
+      padding-left: 1.2rem;
+      font-size: 0.94rem;
+      color: var(--text-main);
+    }
+
+    .experience-bullets li {
+      margin-bottom: 0.2rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+    }
+
+    .pill {
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(11, 99, 206, 0.18);
+      background: #eef4ff;
+      color: var(--accent-dark);
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .skill-tag {
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid #f1f1f1;
+      background: #ffffff;
+    }
+
+    .contact-card {
+      margin-top: 0.6rem;
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid #f1f1f1;
+      background: var(--bg-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr);
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.94rem;
+    }
+
+    .contact-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      color: var(--text-muted);
+    }
+
+    .contact-meta span strong {
+      color: var(--text-main);
+    }
+
+    .contact-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      border-top: 1px solid #f0f0f0;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        position: static;
+      }
+
+      .nav {
+        padding: 0.8rem 1rem;
+      }
+
+      main {
+        padding: 1.5rem 1rem 2.5rem;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+
+      .hero-photo-wrap {
+        order: -1;
+      }
+
+      .hero-photo-inner {
+        margin: 0 auto;
+      }
+
+      .contact-card {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+
+      .contact-actions {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="nav-left">
+        <span class="nav-dot"></span>
+        <span>Jaimin&nbsp;Shah</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="about">
+      <div class="hero-text">
+        <h2>Kelley School of Business</h2>
+        <h1>Jaimin Shah</h1>
+        <p class="hero-summary">
+          Aspiring finance and business analytics major with a biology minor,
+          passionate about understanding markets from both a bottom‑up,
+          company‑level view and a top‑down, macroeconomic perspective shaped
+          by economics and politics.
+        </p>
+
+        <div class="hero-meta">
+          <span>United States</span>
+          <span>Finance &amp; Business Analytics (Kelley)</span>
+          <span>Capital Markets, Portfolio Management, M&amp;A</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Get in touch</a>
+          <a href="https://www.linkedin.com/in/jaiminmonilshah/" target="_blank" rel="noopener" class="btn btn-ghost">
+            View LinkedIn Profile
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-inner">
+          <div class="hero-photo-circle">
+            <!-- Profile image: place a circular-cropped file at assets/jaimin-shah-profile.png -->
+            <img src="assets/Screenshot_2026-02-24_at_7.31.09_PM-e65f4fd2-34c8-453d-ac11-6cc9628cb832.png" alt="Portrait of Jaimin Shah" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h3>Experience</h3>
+      <p class="section-intro">
+        Jaimin blends finance, economics, and strategic thinking through
+        capital markets, portfolio management, policy, and consulting
+        experiences.
+      </p>
+
+      <div class="experience-list">
+        <!-- Capital Markets Club -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">Equity Research Division Member</div>
+              <div class="experience-company">Capital Markets Club</div>
+            </div>
+            <div class="experience-meta">
+              <span>Sep 2025 – Present</span>
+              <span>Bloomington, Indiana, United States</span>
+            </div>
+          </div>
+          <ul class="experience-bullets">
+            <li>Conducts valuation analyses (DCF, comps) in Excel to strengthen the accuracy of investment theses.</li>
+            <li>Assesses macro trends in growth, employment, inflation, and fiscal and monetary policy to identify risks and inform weekly market discussions.</li>
+            <li>Collaborates with a 10–15 member research cohort to refine models and enhance clarity of stock pitches presented to club leadership.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Equity Research</span>
+            <span class="pill">DCF &amp; Comps</span>
+            <span class="pill">Macroeconomics</span>
+          </div>
+        </article>
+
+        <!-- Portfolio Management Club -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">Economic Analyst</div>
+              <div class="experience-company">Portfolio Management Club</div>
+            </div>
+            <div class="experience-meta">
+              <span>Sep 2025 – Present</span>
+              <span>Bloomington, Indiana, United States</span>
+            </div>
+          </div>
+          <ul class="experience-bullets">
+            <li>Analyzes macroeconomic indicators including GDP, inflation, and labor market conditions to support portfolio allocation proposals.</li>
+            <li>Develops weekly economic briefings synthesizing market‑moving events to guide discussion and risk assessment within the club.</li>
+            <li>Evaluates sector performance and rate expectations to identify opportunities and strengthen long‑term strategy recommendations.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Portfolio Strategy</span>
+            <span class="pill">Economic Briefings</span>
+          </div>
+        </article>
+
+        <!-- M&A Advisors at Indiana -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">Member</div>
+              <div class="experience-company">M&amp;A Advisors At Indiana</div>
+            </div>
+            <div class="experience-meta">
+              <span>Sep 2025 – Present</span>
+              <span>Bloomington, Indiana, United States</span>
+            </div>
+          </div>
+          <ul class="experience-bullets">
+            <li>Conducts preliminary valuation work to support deal analyses and group discussions.</li>
+            <li>Assesses strategic fit and market positioning of potential acquisition targets to clarify risks and strengthen recommendation logic.</li>
+            <li>Collaborates on case studies and pitch materials to improve presentation quality and analytical rigor.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">M&amp;A</span>
+            <span class="pill">Deal Analysis</span>
+          </div>
+        </article>
+
+        <!-- Office of Assemblyman Andrew Zwicker -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">Summer Intern</div>
+              <div class="experience-company">Office of Assemblyman Andrew Zwicker</div>
+            </div>
+            <div class="experience-meta">
+              <span>Jun 2024 – Aug 2024</span>
+              <span>Hillsborough, NJ · On‑site</span>
+            </div>
+          </div>
+          <ul class="experience-bullets">
+            <li>Drafted detailed bill memos summarizing legislative intent, fiscal impact, stakeholder positions, and policy implications ahead of committee hearings.</li>
+            <li>Researched active legislation in education, infrastructure, and clean energy to support data‑driven policy recommendations.</li>
+            <li>Analyzed constituent casework and correspondence to surface recurring issues and integrate district concerns into memos and outreach materials.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Public Policy</span>
+            <span class="pill">Legislative Research</span>
+          </div>
+        </article>
+
+        <!-- Imugene Limited -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">Imugene Limited Intern</div>
+              <div class="experience-company">Imugene Limited</div>
+            </div>
+            <div class="experience-meta">
+              <span>Jul 2023 – Aug 2023</span>
+              <span>Sydney, New South Wales, Australia</span>
+            </div>
+          </div>
+          <ul class="experience-bullets">
+            <li>Analyzed 25+ licensing agreements across institutions and partners to extract key financial terms and improve internal visibility.</li>
+            <li>Developed an Excel‑based tracking tool consolidating fees, milestones, and royalty structures to streamline analysis and reduce lookup time.</li>
+            <li>Synthesized contract insights for senior staff to support decisions around partnership obligations and upcoming payment triggers.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Licensing Analysis</span>
+            <span class="pill">Excel Modeling</span>
+          </div>
+        </article>
+
+        <!-- IAA Consulting LLC -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">Intern</div>
+              <div class="experience-company">IAA Consulting LLC</div>
+            </div>
+            <div class="experience-meta">
+              <span>Jun 2022 – Aug 2022</span>
+              <span>New Jersey, United States · On‑site</span>
+            </div>
+          </div>
+          <ul class="experience-bullets">
+            <li>Conducted literature research on pharmaceutical products and market trends to support client strategy discussions.</li>
+            <li>Synthesized research findings into clear insights and translated them into professional presentations for Advisory Board meetings.</li>
+            <li>Collaborated with consultants to refine slide decks and improve clarity, accuracy, and impact for executive audiences.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Consulting</span>
+            <span class="pill">Market Research</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h3>Skills &amp; Focus Areas</h3>
+      <p class="section-intro">
+        Jaimin brings together analytical rigor, clear communication, and a
+        strong interest in markets, policy, and community impact.
+      </p>
+      <div class="skills-grid">
+        <span class="skill-tag">Finance</span>
+        <span class="skill-tag">Business Analytics</span>
+        <span class="skill-tag">Equity &amp; Macro Research</span>
+        <span class="skill-tag">Valuation Modeling</span>
+        <span class="skill-tag">Analytical Skills</span>
+        <span class="skill-tag">Detail‑Oriented</span>
+        <span class="skill-tag">Communication</span>
+        <span class="skill-tag">Management &amp; Leadership</span>
+        <span class="skill-tag">Intellectually Curious</span>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <h3>Education</h3>
+      <div class="experience-list">
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">Finance and Business Analytics, Biology Minor</div>
+              <div class="experience-company">Indiana University – Kelley School of Business</div>
+            </div>
+            <div class="experience-meta">
+              <span>Aug 2025 – May 2029</span>
+              <span>Freshman</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">High School Diploma</div>
+              <div class="experience-company">Montgomery High School</div>
+            </div>
+            <div class="experience-meta">
+              <span>Sep 2021 – Jun 2025</span>
+            </div>
+          </div>
+          <ul class="experience-bullets">
+            <li>Young Investors Society (Executive Director)</li>
+            <li>Youth Action Board (Founding Member)</li>
+            <li>Monty Tutoring (Head of Community Engagement)</li>
+            <li>Junior Varsity Golf</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Honors & Awards -->
+    <section id="awards">
+      <h3>Honors &amp; Awards</h3>
+      <div class="experience-list">
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">1st Place: Luddy Consulting Association x KTP Case Competition</div>
+              <div class="experience-company">Luddy Consulting Association</div>
+            </div>
+            <div class="experience-meta">
+              <span>Nov 2025</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">National Honors Society</div>
+              <div class="experience-company">Montgomery High School</div>
+            </div>
+            <div class="experience-meta">
+              <span>Dec 2023</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">Somerset County Inspirational Women Essay Contest – Junior Grade Winner</div>
+              <div class="experience-company">Somerset County Commission on the Status of Women</div>
+            </div>
+            <div class="experience-meta">
+              <span>Dec 2023</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <div class="experience-title">AP Scholar with Distinction</div>
+              <div class="experience-company">College Board</div>
+            </div>
+          </div>
+          <ul class="experience-bullets">
+            <li>Average of 4.75 on eight AP exams, including scores of 5 on seven exams.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h3>Contact</h3>
+      <div class="contact-card">
+        <div class="contact-meta">
+          <span><strong>Open to:</strong> Roles in investment research, asset management, and related finance or strategy positions.</span>
+          <span><strong>Location preferences:</strong> United States · On‑site, Hybrid, or Remote</span>
+          <span><strong>Summary:</strong> Motivated by curiosity and continuous learning, Jaimin looks for roles that challenge him to think critically about markets and connect data to actionable insights.</span>
+        </div>
+        <div class="contact-actions">
+          <!-- Update `mailto:` and LinkedIn URL as needed -->
+          <a href="mailto:jaimshah@iu.edu" class="btn btn-primary">Email Jaimin</a>
+          <a href="https://www.linkedin.com/in/jaiminmonilshah/" target="_blank" rel="noopener" class="btn btn-ghost">
+            Message on LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Jaimin Shah. All rights reserved.
+  </footer>
+
+  <script>
+    // Simple dynamic year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
